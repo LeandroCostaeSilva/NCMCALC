@@ -1,0 +1,77 @@
+flowchart TD
+    A[Início: Acesso à Aplicação] --> B[Tela de Login/Registro]
+    B --> C{Usuário já tem conta?}
+    C -->|Não| D[Formulário de Registro]
+    D --> E[Validação de Email]
+    E --> F[Dashboard Principal]
+    C -->|Sim| G[Formulário de Login]
+    G --> H[Validação Credenciais]
+    H --> F
+    
+    subgraph Dashboard [Dashboard Principal]
+        F --> I[Menu de Navegação]
+        I --> J[Nova Análise]
+        I --> K[Histórico de Cálculos]
+        I --> L[Cenários Salvos]
+        I --> M[Configurações]
+    end
+    
+    J --> N[Seleção do Método de Entrada]
+    N --> O{Como deseja prosseguir?}
+    O -->|Buscar por NCM| P[Busca de Código NCM]
+    O -->|Digitar Manualmente| Q[Formulário de Dados do Produto]
+    
+    P --> R[Campo de Busca NCM]
+    R --> S{Encontrou o NCM?}
+    S -->|Não| T[Tentar Novamente ou Digitar Manualmente]
+    S -->|Sim| U[Selecionar NCM]
+    U --> V[Auto-preencher Dados do Produto]
+    T --> Q
+    
+    Q --> W[Formulário de Dados do Produto]
+    W --> X[Preencher Informações:<br>- Valor Unitário (USD)<br>- Quantidade<br>- País de Origem<br>- Modalidade de Transporte]
+    
+    X --> Y[Formulário de Custos Adicionais]
+    Y --> Z[Inserir Custos:<br>- Frete Internacional<br>- Seguro<br>- Taxas de Desembaraço<br>- Outras Despesas]
+    
+    Z --> AA[Seleção de Moeda e Conversão]
+    AA --> AB[Confirmar Cotação do Dólar]
+    AB --> AC[Processar Cálculos Tributários]
+    
+    AC --> AD[Exibição de Resultados]
+    AD --> AE[Breakdown de Tributos:<br>- II, IPI, PIS, COFINS, ICMS]
+    AE --> AF[Custos Totais e Estrutura]
+    
+    AF --> AG[Simulador de Preço de Revenda]
+    AG --> AH[Inserir Preço de Mercado ou Margem Desejada]
+    AH --> AI[Calcular Projeção de Lucro]
+    
+    AI --> AJ[Relatório Completo]
+    AJ --> AK{Salvar Análise?}
+    AK -->|Sim| AL[Dar Nome ao Cálculo e Salvar]
+    AK -->|Não| AM[Compartilhar ou Exportar]
+    
+    AL --> AN[Opções de Pós-Cálculo]
+    AM --> AN
+    
+    AN --> AO[Voltar ao Dashboard]
+    AN --> AP[Novo Cálculo]
+    AN --> AQ[Exportar para PDF/Excel]
+    AN --> AR[Compartilhar com Colega]
+    
+    K --> AS[Lista de Cálculos Anteriores]
+    AS --> AT[Filtrar por Data, NCM ou Produto]
+    AT --> AU[Visualizar Detalhes do Cálculo]
+    AU --> AV[Reutilizar Cálculo]
+    AV --> X
+    
+    L --> AW[Lista de Cenários Salvos]
+    AW --> AX[Selecionar Cenário]
+    AX --> AY[Aplicar a Novo Cálculo]
+    AY --> X
+    
+    M --> AZ[Configurações do Usuário]
+    AZ --> BA[Preferências de Moeda]
+    AZ --> BB[Configurações de Impostos Padrão]
+    AZ --> BC[Gestão de Notificações]
+    AZ --> BD[Dados da Empresa]

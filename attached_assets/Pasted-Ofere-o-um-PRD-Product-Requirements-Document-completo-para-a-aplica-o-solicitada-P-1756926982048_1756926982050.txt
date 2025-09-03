@@ -1,0 +1,161 @@
+Ofereço um PRD (Product Requirements Document) completo para a aplicação solicitada:
+
+---
+
+# **PRD - Calculadora de Tributação e Lucratividade para Importação**
+
+## **1. Visão Geral do Produto**
+Aplicação web/mobile que calcula automaticamente todos os tributos, custos e projeta a margem de lucro na revenda de produtos importados, integrando-se com APIs governamentais e de conversão monetária.
+
+## **2. Problema a Ser Resolvido**
+Importadores enfrentam complexidade no cálculo preciso de custos de importação e dificuldade em projetar a viabilidade econômica da revenda devido à:
+- Complexidade tributária brasileira
+- Múltiplas variáveis envolvidas
+- Dificuldade em acessar informações atualizadas
+- Incerteza na precificação final
+
+## **3. Objetivos**
+- **Reduzir** erros no cálculo tributário em ≥90%
+- **Economizar** ≥4 horas semanais por usuário em cálculos manuais
+- **Aumentar** a precisão nas projeções de lucratividade em ≥95%
+- **Simplificar** o processo de análise de viabilidade de importação
+
+## **4. Personas do Usuário**
+- **Importadores iniciantes**: Pequenos empresários com conhecimento limitado em importação
+- **Importadores experientes**: Profissionais que buscam eficiência e precisão
+- **Contadores/Tributaristas**: Especialistas que necessitam validar cálculos rapidamente
+- **Analistas de compras**: Profissionais de empresas que avaliam viabilidade de importação
+
+## **5. Requisitos Funcionais**
+
+### **5.1. Módulo de Entrada de Dados**
+- RF01: Interface para entrada dos dados do produto:
+  - Código NCM (com auto-complete via API Siscomex)
+  - Descrição do produto
+  - Valor unitário em USD
+  - Quantidade
+  - País de origem
+  - Modalidade de transporte (marítimo, aéreo, terrestre)
+
+- RF02: Entrada de custos adicionais:
+  - Frete internacional (USD)
+  - Seguro (USD)
+  - Taxas de desembaraço (BRL)
+  - Outras despesas accessórias
+
+### **5.2. Módulo de Integração com APIs**
+- RF03: Integração com API do Portal Único Siscomex
+  - Busca automática de alíquotas de II, IPI, PIS, COFINS
+  - Identificação de tributos específicos por NCM
+  - Verificação de acordos comerciais (ex: Mercosul)
+
+- RF04: Integração com API de conversão monetária
+  - Cotação atual do dólar comercial
+  - Histórico de cotações (para análise temporal)
+  - Múltiplas moedas (EUR, CNY, etc.)
+
+- RF05: Integração com API de estatísticas de comércio exterior (opcional)
+  - Dados históricos de importação por NCM
+  - Preços médios praticados
+
+### **5.3. Módulo de Cálculo Tributário**
+- RF06: Cálculo automático de todos os tributos:
+  - Imposto de Importação (II)
+  - IPI
+  - PIS-Importação
+  - COFINS-Importação
+  - ICMS (considerando diferencial de alíquota)
+  - Taxas administrativas (Siscomex, AFRMM)
+
+- RF07: Cálculo da base de cálculo de cada imposto
+- RF08: Aplicação de regras de arredondamento conforme legislação
+- RF09: Consideração de incidência cumulativa/não-cumulativa
+
+### **5.4. Módulo de Projeção de Lucratividade**
+- RF10: Entrada do preço de revenda no mercado nacional
+- RF11: Cálculo de custos operacionais:
+  - Armazenagem
+  - Logística nacional
+  - Marketing
+  - Taxas de marketplace
+  - Outros custos operacionais (configuráveis)
+
+- RF12: Projeção de margem de lucro:
+  - Margem bruta
+  - Margem líquida
+  - Ponto de equilíbrio
+  - ROI esperado
+
+### **5.5. Módulo de Relatórios e Visualização**
+- RF13: Dashboard com breakdown completo de custos
+- RF14: Visualização gráfica da composição do preço final
+- RF15: Relatório detalhado para impressão/compartilhamento
+- RF16: Histórico de cálculos realizados
+- RF17: Exportação para Excel/PDF
+
+## **6. Requisitos Não-Funcionais**
+- RNF01: **Performance**: Cálculos realizados em <3 segundos
+- RNF02: **Disponibilidade**: 99,5% uptime
+- RNF03: **Segurança**: Certificado SSL, conformidade com LGPD
+- RNF04: **Usabilidade**: Interface intuitiva com curva de aprendizado <15 minutos
+- RNF05: **Precisão**: Cálculos com precisão de 99,9% em relação à legislação
+- RNF06: **Responsividade**: Compatibilidade com mobile e desktop
+
+## **7. Fluxo de Trabalho Principal**
+1. Usuário insere código NCM ou busca por descrição do produto
+2. Sistema autocompleta informações do NCM via API Siscomex
+3. Usuário informa valor, quantidade e custos adicionais
+4. Sistema converte valores para BRL usando cotação atual
+5. Sistema calcula automaticamente todos os tributos
+6. Usuário informa preço de revenda pretendido
+7. Sistema calcula margens de lucro e projeta resultados
+8. Usuário visualiza relatório completo e toma decisão
+
+## **8. Métricas de Sucesso**
+- **Adoção**: ≥1.000 usuários ativos/mês no primeiro ano
+- **Retenção**: ≥40% de usuários retornando semanalmente
+- **Satisfação**: NPS ≥60
+- **Precisão**: ≤0,5% de discrepância em validações com especialistas
+
+## **9. Considerações Técnicas**
+- Arquitetura front-end: React/Vue.js
+- Back-end: Node.js/Python
+- Banco de dados: PostgreSQL para histórico de cálculos
+- APIs de integração:
+  - Portal Único Siscomex (NCM e tributos)
+  - AwesomeAPI/Bacen (conversão monetária)
+  - IBGE/SECEX (dados estatísticos)
+
+## **10. Roadmap Prioritizado**
+
+### **Fase 1 (MVP - 2 meses)**
+- Cálculo básico de II, IPI, PIS, COFINS
+- Integração com API de cotação dólar
+- Interface web responsiva básica
+- Relatório simples de custos
+
+### **Fase 2 (3 meses)**
+- Cálculo de ICMS com diferencial de alíquota
+- Módulo completo de projeção de lucratividade
+- Dashboard avançado com gráficos
+- Histórico de cálculos
+
+### **Fase 3 (3 meses)**
+- App mobile nativo
+- Integração com sistemas contábeis
+- Múltiplos perfis de usuário
+- Recursos colaborativos
+
+## **11. Riscos e Mitigação**
+- **Risco**: Alterações na legislação tributária
+  **Mitigação**: Sistema de notificações e atualizações automáticas
+
+- **Risco**: Indisponibilidade de APIs governamentais
+  **Mitigação**: Cache de dados e modo offline limitado
+
+- **Risco**: Complexidade dos cálculos de ICMS interestadual
+  **Mitigação**: Parceria com especialistas tributários para validação
+
+---
+
+Este PRD fornece uma base completa para o desenvolvimento da aplicação, cobrindo todos os aspectos necessários para uma solução robusta e útil para importadores.

@@ -1,0 +1,188 @@
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Tabela de usuários do sistema
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  password      String
+  company       String?
+  userType      UserType @default(IMPORTER)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  calculations  Calculation[]
+  productScenarios ProductScenario[]
+  
+  @@map("users")
+}
+
+// Tipos de usuário
+enum UserType {
+  IMPORTER       // Importador
+  TAX_CONSULTANT // Consultor tributário
+  ADMIN          // Administrador do sistema
+}
+
+// Tabela para armazenar os cálculos realizados
+model Calculation {
+  id              String   @id @default(cuid())
+  userId          String
+  scenarioId      String?
+  productName     String
+  ncmCode         String
+  description     String?
+  unitValueUSD    Float
+  quantity        Int
+  originCountry   String
+  transportMode   TransportMode
+  exchangeRate    Float
+  totalCostUSD    Float
+  totalCostBRL    Float
+  totalTaxesBRL   Float
+  finalCostBRL    Float
+  suggestedPrice  Float?
+  expectedRevenue Float?
+  profitMargin    Float?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relacionamentos
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scenario  ProductScenario? @relation(fields: [scenarioId], references: [id], onDelete: SetNull)
+  taxes     TaxDetail[]
+  costs     CostDetail[]
+  
+  @@map("calculations")
+}
+
+// Detalhamento dos tributos calculados
+model TaxDetail {
+  id            String   @id @default(cuid())
+  calculationId String
+  taxType       TaxType
+  rate          Float    // Alíquota percentual
+  baseValue     Float    // Base de cálculo
+  amount        Float    // Valor do imposto
+  createdAt     DateTime @default(now())
+  
+  // Relacionamentos
+  calculation Calculation @relation(fields: [calculationId], references: [id], onDelete: Cascade)
+  
+  @@map("tax_details")
+}
+
+// Tipos de tributos
+enum TaxType {
+  II      // Imposto de Importação
+  IPI     // Imposto sobre Produtos Industrializados
+  PIS     // Programa de Integração Social
+  COFINS  // Contribuição para o Financiamento da Seguridade Social
+  ICMS    // Imposto sobre Circulação de Mercadorias e Serviços
+  OTHERS  // Outros tributos
+}
+
+// Detalhamento dos custos envolvidos
+model CostDetail {
+  id            String   @id @default(cuid())
+  calculationId String
+  costType      CostType
+  amountUSD     Float?
+  amountBRL     Float
+  description   String?
+  createdAt     DateTime @default(now())
+  
+  // Relacionamentos
+  calculation Calculation @relation(fields: [calculationId], references: [id], onDelete: Cascade)
+  
+  @@map("cost_details")
+}
+
+// Tipos de custos
+enum CostType {
+  FREIGHT         // Frete internacional
+  INSURANCE       // Seguro
+  CLEARANCE_FEES  // Taxas de desembaraço
+  BROKER_FEES     // Honorários despachante
+  STORAGE         // Armazenagem
+  DOMESTIC_FREIGHT // Frete interno
+  MARKETING       // Marketing
+  PLATFORM_FEES   // Taxas de marketplace
+  OTHER_COSTS     // Outros custos
+}
+
+// Modalidades de transporte
+enum TransportMode {
+  MARITIME  // Marítimo
+  AIR       // Aéreo
+  ROAD      // Rodoviário
+}
+
+// Cenários de produtos pré-configurados
+model ProductScenario {
+  id              String   @id @default(cuid())
+  userId          String
+  name            String
+  ncmCode         String
+  description     String?
+  unitValueUSD    Float
+  originCountry   String
+  transportMode   TransportMode
+  exchangeRate    Float?
+  defaultQuantity Int      @default(1)
+  freightCost     Float?   // Custo de frete padrão
+  insuranceCost   Float?   // Custo de seguro padrão
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relacionamentos
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  calculations Calculation[]
+  
+  @@map("product_scenarios")
+}
+
+// Tabela para cache de informações de NCM
+model NcmCache {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  description String
+  iiRate      Float?   // Alíquota do Imposto de Importação
+  ipiRate     Float?   // Alíquota do IPI
+  pisRate     Float?   // Alíquota do PIS
+  cofinsRate  Float?   // Alíquota do COFINS
+  icmsRate    Float?   // Alíquota do ICMS (média)
+  ex          Int?     // Ex tarifário
+  updatedAt   DateTime @updatedAt
+  expiresAt   DateTime // Data de expiração do cache
+  
+  @@map("ncm_cache")
+}
+
+// Tabela para histórico de cotações de moeda
+model ExchangeRateHistory {
+  id          String   @id @default(cuid())
+  currency    String   @default("USD")
+  rate        Float
+  recordedAt  DateTime @default(now())
+  
+  @@map("exchange_rate_history")
+}
+
+// Tabela para configurações do sistema
+model SystemConfig {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt
+  
+  @@map("system_config")
+}
