@@ -348,6 +348,36 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Homepage CTA improvements */
+.cta-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cta-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.cta-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Landing page improvements */
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(13, 110, 253, 0.3);
+}
+
 /* Accessibility improvements */
 .sr-only {
     position: absolute;

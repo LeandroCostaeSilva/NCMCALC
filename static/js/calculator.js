@@ -99,9 +99,9 @@ function searchNCMCodes(query) {
             populateNCMSuggestions(data);
         })
         .catch(error => {
-            console.error('Error searching NCM codes:', error);
+            console.error('Erro na busca NCM:', error);
             showNCMLoading(false);
-            showNotification('Erro ao buscar códigos NCM', 'warning');
+            // Don't show notification for NCM search errors to avoid spam
         });
 }
 
