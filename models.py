@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import secrets
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
@@ -12,6 +13,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(256), nullable=False)
     company = db.Column(db.String(200), nullable=True)
     user_type = db.Column(db.Enum('IMPORTER', 'TAX_CONSULTANT', 'ADMIN', name='user_type'), default='IMPORTER')
+    reset_token = db.Column(db.String(100), nullable=True)
+    reset_token_expires = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -24,6 +27,25 @@ class User(UserMixin, db.Model):
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def generate_reset_token(self):
+        """Generate a secure reset token that expires in 1 hour"""
+        self.reset_token = secrets.token_urlsafe(32)
+        self.reset_token_expires = datetime.utcnow() + timedelta(hours=1)
+        return self.reset_token
+    
+    def verify_reset_token(self, token):
+        """Verify if the reset token is valid and not expired"""
+        if not self.reset_token or not self.reset_token_expires:
+            return False
+        if datetime.utcnow() > self.reset_token_expires:
+            return False
+        return self.reset_token == token
+    
+    def clear_reset_token(self):
+        """Clear the reset token after successful password reset"""
+        self.reset_token = None
+        self.reset_token_expires = None
 
 class Calculation(db.Model):
     __tablename__ = 'calculations'

@@ -5,7 +5,7 @@ import logging
 
 from app import app, db
 from models import User, Calculation, TaxDetail, CostDetail, ProductScenario
-from forms import LoginForm, RegisterForm, ProductForm, CostForm, ProfitabilityForm, ScenarioForm
+from forms import LoginForm, RegisterForm, ProductForm, CostForm, ProfitabilityForm, ScenarioForm, ForgotPasswordForm, ResetPasswordForm
 from services.tax_calculator import BrazilianTaxCalculator
 from services.currency_service import CurrencyService
 from services.ncm_service import NCMService
@@ -98,6 +98,58 @@ def logout():
     logout_user()
     flash('Logout realizado com sucesso!', 'info')
     return redirect(url_for('index'))
+
+# Rotas de Recuperação de Senha
+@app.route('/esqueci-senha', methods=['GET', 'POST'])
+def forgot_password():
+    """Página de solicitação de recuperação de senha"""
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    
+    form = ForgotPasswordForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            # Gerar token de recuperação
+            token = user.generate_reset_token()
+            db.session.commit()
+            
+            # Simular envio de email (sem SMTP real por enquanto)
+            # Em produção, aqui enviaria um email real
+            reset_url = url_for('reset_password', token=token, _external=True)
+            
+            # Para desenvolvimento, vamos mostrar o link na mensagem
+            flash(f'Link de recuperação: {reset_url}', 'info')
+            flash('Instruções de recuperação foram enviadas para seu email.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Email não encontrado no sistema.', 'warning')
+    
+    return render_template('auth/forgot_password.html', form=form)
+
+@app.route('/redefinir-senha/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    """Página de redefinição de senha com token"""
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    
+    # Buscar usuário com token válido
+    user = User.query.filter_by(reset_token=token).first()
+    if not user or not user.verify_reset_token(token):
+        flash('Token de recuperação inválido ou expirado.', 'danger')
+        return redirect(url_for('login'))
+    
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        # Redefinir senha
+        user.set_password(form.password.data)
+        user.clear_reset_token()
+        db.session.commit()
+        
+        flash('Senha redefinida com sucesso! Faça login com sua nova senha.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('auth/reset_password.html', form=form, token=token)
 
 # Rotas do Calculador
 @app.route('/nova-analise')

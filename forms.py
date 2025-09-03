@@ -70,3 +70,15 @@ class ScenarioForm(FlaskForm):
     name = StringField('Nome do Cenário', validators=[DataRequired(), Length(max=200)], 
                       render_kw={'placeholder': 'Ex: iPhone 15 Pro China', 'class': 'form-control'})
     submit = SubmitField('Salvar Cenário', render_kw={'class': 'btn btn-primary'})
+
+class ForgotPasswordForm(FlaskForm):
+    email = StringField('E-mail', validators=[DataRequired(), Email()], 
+                       render_kw={'placeholder': 'seu@email.com', 'class': 'form-control'})
+    submit = SubmitField('Enviar Link de Recuperação', render_kw={'class': 'btn btn-primary w-100'})
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Nova Senha', validators=[DataRequired(), Length(min=6)], 
+                           render_kw={'placeholder': 'Mínimo 6 caracteres', 'class': 'form-control'})
+    password2 = PasswordField('Confirmar Nova Senha', validators=[DataRequired(), EqualTo('password', message='As senhas devem ser iguais')], 
+                            render_kw={'placeholder': 'Digite a senha novamente', 'class': 'form-control'})
+    submit = SubmitField('Redefinir Senha', render_kw={'class': 'btn btn-success w-100'})
