@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Erro Interno - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <i data-feather="alert-triangle" style="width: 100px; height: 100px; opacity: 0.3;" class="text-danger"></i>
+        </div>
+        
+        <h1 class="display-1 fw-bold text-muted">500</h1>
+        <h2 class="mb-3">Erro Interno do Servidor</h2>
+        <p class="lead text-muted mb-4">
+            Ocorreu um erro inesperado em nosso servidor. Nossa equipe foi notificada e está trabalhando para resolver o problema.
+        </p>
+        
+        <div class="alert alert-info d-inline-block text-start">
+            <h6 class="alert-heading">
+                <i data-feather="info" class="me-2"></i>
+                O que você pode fazer:
+            </h6>
+            <ul class="mb-0">
+                <li>Aguarde alguns minutos e tente novamente</li>
+                <li>Verifique se os dados inseridos estão corretos</li>
+                <li>Atualize a página (F5)</li>
+                <li>Entre em contato conosco se o problema persistir</li>
+            </ul>
+        </div>
+        
+        <div class="mt-4">
+            <div class="d-flex justify-content-center gap-3">
+                <button onclick="location.reload()" class="btn btn-primary">
+                    <i data-feather="refresh-cw" class="me-2"></i>
+                    Tentar Novamente
+                </button>
+                
+                <a href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('index') }}" class="btn btn-outline-primary">
+                    <i data-feather="home" class="me-2"></i>
+                    Voltar ao Início
+                </a>
+            </div>
+        </div>
+        
+        <div class="mt-5">
+            <small class="text-muted">
+                Código do erro: 500 • 
+                Horário: {{ moment().format('DD/MM/YYYY HH:mm') if moment else 'N/A' }}
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}

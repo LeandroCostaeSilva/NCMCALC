@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Página Não Encontrada - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center py-5">
+        <div class="mb-4">
+            <i data-feather="search" style="width: 100px; height: 100px; opacity: 0.3;"></i>
+        </div>
+        
+        <h1 class="display-1 fw-bold text-muted">404</h1>
+        <h2 class="mb-3">Página Não Encontrada</h2>
+        <p class="lead text-muted mb-4">
+            A página que você está procurando não existe ou foi movida.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('index') }}" class="btn btn-primary">
+                <i data-feather="home" class="me-2"></i>
+                Voltar ao Início
+            </a>
+            
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('new_calculation') }}" class="btn btn-outline-primary">
+                <i data-feather="plus-circle" class="me-2"></i>
+                Nova Análise
+            </a>
+            {% endif %}
+        </div>
+        
+        <div class="mt-5">
+            <h6 class="text-muted">Procurando por algo específico?</h6>
+            <div class="d-flex justify-content-center mt-3">
+                {% if current_user.is_authenticated %}
+                <ul class="list-inline text-muted">
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('dashboard') }}" class="text-decoration-none">Dashboard</a>
+                    </li>
+                    <li class="list-inline-item">•</li>
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('calculation_history') }}" class="text-decoration-none">Histórico</a>
+                    </li>
+                    <li class="list-inline-item">•</li>
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('saved_scenarios') }}" class="text-decoration-none">Cenários</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="list-inline text-muted">
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('login') }}" class="text-decoration-none">Login</a>
+                    </li>
+                    <li class="list-inline-item">•</li>
+                    <li class="list-inline-item">
+                        <a href="{{ url_for('register') }}" class="text-decoration-none">Criar Conta</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

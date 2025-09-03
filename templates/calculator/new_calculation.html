@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+
+{% block title %}Nova Análise - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2><i data-feather="plus-circle" class="me-2"></i>Nova Análise de Importação</h2>
+                    <p class="text-muted">Preencha os dados do produto para calcular os custos de importação</p>
+                </div>
+                <div class="text-end">
+                    <small class="text-muted">Cotação atual USD/BRL:</small><br>
+                    <span class="h5 text-success" id="current-rate">R$ {{ "%.4f"|format(current_rate) }}</span>
+                    <button class="btn btn-sm btn-outline-secondary ms-2" onclick="updateExchangeRate()">
+                        <i data-feather="refresh-cw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('calculate') }}" id="calculation-form">
+        {{ product_form.hidden_tag() }}
+        {{ cost_form.hidden_tag() }}
+
+        <!-- Step 1: Product Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i data-feather="package" class="me-2"></i>
+                    1. Dados do Produto
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ product_form.product_name.id }}" class="form-label">
+                            {{ product_form.product_name.label.text }}
+                        </label>
+                        {{ product_form.product_name() }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ product_form.ncm_code.id }}" class="form-label">
+                            {{ product_form.ncm_code.label.text }}
+                            <button type="button" class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="modal" data-bs-target="#ncmHelpModal">
+                                <i data-feather="help-circle"></i>
+                            </button>
+                        </label>
+                        {{ product_form.ncm_code() }}
+                        <datalist id="ncm-suggestions"></datalist>
+                        <div id="ncm-info" class="small text-muted mt-1"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="{{ product_form.description.id }}" class="form-label">
+                            {{ product_form.description.label.text }}
+                        </label>
+                        {{ product_form.description() }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="{{ product_form.unit_value_usd.id }}" class="form-label">
+                            {{ product_form.unit_value_usd.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">US$</span>
+                            {{ product_form.unit_value_usd() }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="{{ product_form.quantity.id }}" class="form-label">
+                            {{ product_form.quantity.label.text }}
+                        </label>
+                        {{ product_form.quantity() }}
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="{{ product_form.origin_country.id }}" class="form-label">
+                            {{ product_form.origin_country.label.text }}
+                        </label>
+                        {{ product_form.origin_country() }}
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="{{ product_form.transport_mode.id }}" class="form-label">
+                            {{ product_form.transport_mode.label.text }}
+                        </label>
+                        {{ product_form.transport_mode() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Additional Costs -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i data-feather="dollar-sign" class="me-2"></i>
+                    2. Custos Adicionais
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ cost_form.freight_usd.id }}" class="form-label">
+                            {{ cost_form.freight_usd.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">US$</span>
+                            {{ cost_form.freight_usd() }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ cost_form.insurance_usd.id }}" class="form-label">
+                            {{ cost_form.insurance_usd.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">US$</span>
+                            {{ cost_form.insurance_usd() }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="{{ cost_form.clearance_fees_brl.id }}" class="form-label">
+                            {{ cost_form.clearance_fees_brl.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            {{ cost_form.clearance_fees_brl() }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="{{ cost_form.broker_fees_brl.id }}" class="form-label">
+                            {{ cost_form.broker_fees_brl.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            {{ cost_form.broker_fees_brl() }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="{{ cost_form.other_costs_brl.id }}" class="form-label">
+                            {{ cost_form.other_costs_brl.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            {{ cost_form.other_costs_brl() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg px-5">
+                <i data-feather="calculator" class="me-2"></i>
+                Calcular Impostos e Custos
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- NCM Help Modal -->
+<div class="modal fade" id="ncmHelpModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">O que é NCM?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>A <strong>Nomenclatura Comum do Mercosul (NCM)</strong> é um código de 8 dígitos que classifica todas as mercadorias comercializadas internacionalmente.</p>
+                
+                <h6>Como encontrar o NCM do seu produto:</h6>
+                <ul>
+                    <li>Digite palavras-chave do produto no campo NCM</li>
+                    <li>Consulte o site da Receita Federal</li>
+                    <li>Use a tabela TIPI (Tabela de Incidência do IPI)</li>
+                </ul>
+
+                <h6>Exemplos de NCM:</h6>
+                <ul>
+                    <li><strong>85171200</strong> - Telefones celulares</li>
+                    <li><strong>62034200</strong> - Calças de algodão masculinas</li>
+                    <li><strong>64039900</strong> - Outros calçados</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// NCM Search functionality
+document.getElementById('{{ product_form.ncm_code.id }}').addEventListener('input', function() {
+    const query = this.value;
+    if (query.length >= 3) {
+        fetch(`/api/ncm/buscar?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                const datalist = document.getElementById('ncm-suggestions');
+                datalist.innerHTML = '';
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.code;
+                    option.textContent = `${item.code} - ${item.description}`;
+                    datalist.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Erro ao buscar NCM:', error));
+    }
+});
+
+// NCM Info display
+document.getElementById('{{ product_form.ncm_code.id }}').addEventListener('blur', function() {
+    const ncmCode = this.value.replace(/\D/g, '');
+    if (ncmCode.length === 8) {
+        fetch(`/api/ncm/${ncmCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.description) {
+                    document.getElementById('ncm-info').innerHTML = `
+                        <strong>Descrição:</strong> ${data.description}<br>
+                        <small class="text-success">NCM encontrado na base de dados</small>
+                    `;
+                } else {
+                    document.getElementById('ncm-info').innerHTML = `
+                        <small class="text-warning">NCM não encontrado na base. Serão usadas alíquotas padrão.</small>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById('ncm-info').innerHTML = `
+                    <small class="text-warning">Erro ao verificar NCM. Serão usadas alíquotas padrão.</small>
+                `;
+            });
+    }
+});
+
+// Update exchange rate
+function updateExchangeRate() {
+    const button = document.querySelector('button[onclick="updateExchangeRate()"]');
+    const icon = button.querySelector('i');
+    
+    // Add spinning animation
+    icon.classList.add('fa-spin');
+    button.disabled = true;
+    
+    fetch('/api/cotacao')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('current-rate').textContent = data.formatted;
+        })
+        .catch(error => {
+            console.error('Erro ao atualizar cotação:', error);
+        })
+        .finally(() => {
+            // Remove spinning animation
+            icon.classList.remove('fa-spin');
+            button.disabled = false;
+        });
+}
+
+// Form validation
+document.getElementById('calculation-form').addEventListener('submit', function(e) {
+    const requiredFields = ['{{ product_form.product_name.id }}', '{{ product_form.ncm_code.id }}', '{{ product_form.unit_value_usd.id }}', '{{ product_form.quantity.id }}', '{{ product_form.origin_country.id }}'];
+    
+    for (let fieldId of requiredFields) {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+            field.classList.add('is-invalid');
+            e.preventDefault();
+        } else {
+            field.classList.remove('is-invalid');
+        }
+    }
+});
+</script>
+{% endblock %}

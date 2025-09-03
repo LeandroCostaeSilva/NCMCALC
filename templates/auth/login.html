@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <i data-feather="log-in" style="width: 48px; height: 48px;" class="text-primary"></i>
+                        <h3 class="mt-2">Fazer Login</h3>
+                        <p class="text-muted">Acesse sua conta para continuar</p>
+                    </div>
+
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.email.id }}" class="form-label">
+                                <i data-feather="mail" class="me-1"></i>
+                                {{ form.email.label.text }}
+                            </label>
+                            {{ form.email() }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.email.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.password.id }}" class="form-label">
+                                <i data-feather="lock" class="me-1"></i>
+                                {{ form.password.label.text }}
+                            </label>
+                            {{ form.password() }}
+                            {% if form.password.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.password.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            {{ form.submit() }}
+                        </div>
+                    </form>
+
+                    <div class="text-center">
+                        <p class="text-muted">
+                            Não tem uma conta? 
+                            <a href="{{ url_for('register') }}" class="text-decoration-none">
+                                Criar conta gratuita
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

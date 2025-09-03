@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+
+{% block title %}Cenários Salvos - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i data-feather="bookmark" class="me-2"></i>Cenários Salvos</h2>
+            <p class="text-muted">Gerencie seus cenários de produtos favoritos para análises rápidas</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ url_for('new_calculation') }}" class="btn btn-primary">
+                <i data-feather="plus-circle" class="me-2"></i>
+                Nova Análise
+            </a>
+        </div>
+    </div>
+
+    {% if scenarios %}
+    <!-- Scenarios Grid -->
+    <div class="row">
+        {% for scenario in scenarios %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">{{ scenario.name }}</h6>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i data-feather="more-horizontal"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="useScenario('{{ scenario.id }}')">
+                                    <i data-feather="play" class="me-2"></i>Usar Cenário
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="editScenario('{{ scenario.id }}')">
+                                    <i data-feather="edit" class="me-2"></i>Editar
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="#" onclick="deleteScenario('{{ scenario.id }}')">
+                                    <i data-feather="trash-2" class="me-2"></i>Excluir
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <small class="text-muted">NCM:</small>
+                            <div class="fw-bold">{{ scenario.ncm_code }}</div>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Origem:</small>
+                            <div class="fw-bold">{{ scenario.origin_country }}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <small class="text-muted">Valor Unit.:</small>
+                            <div class="fw-bold">US$ {{ "%.2f"|format(scenario.unit_value_usd) }}</div>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Qtd. Padrão:</small>
+                            <div class="fw-bold">{{ scenario.default_quantity }} un.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <small class="text-muted">Transporte:</small>
+                            <div class="fw-bold">
+                                {% if scenario.transport_mode == 'MARITIME' %}
+                                    <i data-feather="anchor" class="me-1"></i>Marítimo
+                                {% elif scenario.transport_mode == 'AIR' %}
+                                    <i data-feather="plane" class="me-1"></i>Aéreo
+                                {% elif scenario.transport_mode == 'ROAD' %}
+                                    <i data-feather="truck" class="me-1"></i>Rodoviário
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if scenario.description %}
+                    <div class="mb-3">
+                        <small class="text-muted">Descrição:</small>
+                        <p class="small mb-0">{{ scenario.description }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if scenario.freight_cost or scenario.insurance_cost %}
+                    <div class="border-top pt-2">
+                        <small class="text-muted">Custos pré-configurados:</small>
+                        {% if scenario.freight_cost %}
+                        <div class="small">Frete: US$ {{ "%.2f"|format(scenario.freight_cost) }}</div>
+                        {% endif %}
+                        {% if scenario.insurance_cost %}
+                        <div class="small">Seguro: US$ {{ "%.2f"|format(scenario.insurance_cost) }}</div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            Criado em {{ scenario.created_at.strftime('%d/%m/%Y') }}
+                        </small>
+                        <button class="btn btn-sm btn-primary" onclick="useScenario('{{ scenario.id }}')">
+                            <i data-feather="arrow-right" class="me-1"></i>Usar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination would go here if needed -->
+    
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-5">
+        <i data-feather="bookmark" style="width: 80px; height: 80px; opacity: 0.3;"></i>
+        <h4 class="mt-3 text-muted">Nenhum cenário salvo</h4>
+        <p class="text-muted">
+            Salve cenários dos seus produtos mais importados para agilizar futuras análises.<br>
+            Você pode salvar um cenário após realizar um cálculo.
+        </p>
+        <a href="{{ url_for('new_calculation') }}" class="btn btn-primary mt-3">
+            <i data-feather="plus-circle" class="me-2"></i>
+            Realizar Nova Análise
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Edit Scenario Modal -->
+<div class="modal fade" id="editScenarioModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Cenário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-scenario-form">
+                    <div class="mb-3">
+                        <label class="form-label">Nome do Cenário</label>
+                        <input type="text" class="form-control" id="edit-scenario-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-control" id="edit-scenario-description" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Valor Unitário (USD)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">US$</span>
+                                <input type="number" class="form-control" id="edit-scenario-value" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Quantidade Padrão</label>
+                            <input type="number" class="form-control" id="edit-scenario-quantity" min="1" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Frete (USD)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">US$</span>
+                                <input type="number" class="form-control" id="edit-scenario-freight" step="0.01">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Seguro (USD)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">US$</span>
+                                <input type="number" class="form-control" id="edit-scenario-insurance" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveScenarioChanges()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentScenarioId = null;
+
+// Use scenario for new calculation
+function useScenario(scenarioId) {
+    // Redirect to new calculation with scenario pre-filled
+    window.location.href = `/nova-analise?scenario=${scenarioId}`;
+}
+
+// Edit scenario
+function editScenario(scenarioId) {
+    currentScenarioId = scenarioId;
+    
+    // Fetch scenario data and populate modal
+    // This would be implemented with an API call
+    fetch(`/api/scenario/${scenarioId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('edit-scenario-name').value = data.name;
+            document.getElementById('edit-scenario-description').value = data.description || '';
+            document.getElementById('edit-scenario-value').value = data.unit_value_usd;
+            document.getElementById('edit-scenario-quantity').value = data.default_quantity;
+            document.getElementById('edit-scenario-freight').value = data.freight_cost || '';
+            document.getElementById('edit-scenario-insurance').value = data.insurance_cost || '';
+            
+            new bootstrap.Modal(document.getElementById('editScenarioModal')).show();
+        })
+        .catch(error => {
+            console.error('Erro ao carregar cenário:', error);
+            alert('Erro ao carregar dados do cenário');
+        });
+}
+
+// Save scenario changes
+function saveScenarioChanges() {
+    if (!currentScenarioId) return;
+    
+    const formData = {
+        name: document.getElementById('edit-scenario-name').value,
+        description: document.getElementById('edit-scenario-description').value,
+        unit_value_usd: parseFloat(document.getElementById('edit-scenario-value').value),
+        default_quantity: parseInt(document.getElementById('edit-scenario-quantity').value),
+        freight_cost: parseFloat(document.getElementById('edit-scenario-freight').value) || null,
+        insurance_cost: parseFloat(document.getElementById('edit-scenario-insurance').value) || null
+    };
+    
+    fetch(`/api/scenario/${currentScenarioId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            bootstrap.Modal.getInstance(document.getElementById('editScenarioModal')).hide();
+            location.reload(); // Refresh to show changes
+        } else {
+            alert('Erro ao salvar alterações: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao salvar alterações');
+    });
+}
+
+// Delete scenario
+function deleteScenario(scenarioId) {
+    if (confirm('Tem certeza que deseja excluir este cenário? Esta ação não pode ser desfeita.')) {
+        fetch(`/api/scenario/${scenarioId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload(); // Refresh to show changes
+            } else {
+                alert('Erro ao excluir cenário: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao excluir cenário');
+        });
+    }
+}
+</script>
+{% endblock %}

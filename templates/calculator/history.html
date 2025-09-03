@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico de Cálculos - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i data-feather="clock" class="me-2"></i>Histórico de Cálculos</h2>
+            <p class="text-muted">Visualize e gerencie seus cálculos anteriores</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ url_for('new_calculation') }}" class="btn btn-primary">
+                <i data-feather="plus-circle" class="me-2"></i>
+                Nova Análise
+            </a>
+        </div>
+    </div>
+
+    {% if calculations.items %}
+    <!-- Filter and Search -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i data-feather="search"></i></span>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar por produto ou NCM...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="filterPeriod">
+                        <option value="">Todos os períodos</option>
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="30">Últimos 30 dias</option>
+                        <option value="90">Últimos 90 dias</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="sortBy">
+                        <option value="date_desc">Mais recentes</option>
+                        <option value="date_asc">Mais antigos</option>
+                        <option value="product_asc">Nome do produto A-Z</option>
+                        <option value="cost_desc">Maior custo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculations List -->
+    <div class="row" id="calculationsList">
+        {% for calculation in calculations.items %}
+        <div class="col-12 mb-3 calculation-item" 
+             data-product="{{ calculation.product_name.lower() }}"
+             data-ncm="{{ calculation.ncm_code }}"
+             data-date="{{ calculation.created_at.isoformat() }}"
+             data-cost="{{ calculation.final_cost_brl }}">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <h6 class="mb-1">{{ calculation.product_name }}</h6>
+                            <small class="text-muted">
+                                <i data-feather="hash" class="me-1"></i>NCM: {{ calculation.ncm_code }}
+                            </small>
+                            <br>
+                            <small class="text-muted">
+                                <i data-feather="map-pin" class="me-1"></i>{{ calculation.origin_country }}
+                            </small>
+                        </div>
+                        
+                        <div class="col-md-2 text-center">
+                            <small class="text-muted d-block">Quantidade</small>
+                            <strong>{{ calculation.quantity }} un.</strong>
+                        </div>
+                        
+                        <div class="col-md-2 text-center">
+                            <small class="text-muted d-block">Valor Unitário</small>
+                            <strong>US$ {{ "%.2f"|format(calculation.unit_value_usd) }}</strong>
+                        </div>
+                        
+                        <div class="col-md-2 text-center">
+                            <small class="text-muted d-block">Custo Total</small>
+                            <strong class="text-success">R$ {{ "{:,.2f}"|format(calculation.final_cost_brl) }}</strong>
+                        </div>
+                        
+                        <div class="col-md-2 text-end">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i data-feather="more-horizontal"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ url_for('calculation_results', calc_id=calculation.id) }}">
+                                            <i data-feather="eye" class="me-2"></i>Visualizar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" onclick="duplicateCalculation('{{ calculation.id }}')">
+                                            <i data-feather="copy" class="me-2"></i>Duplicar
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="#" onclick="deleteCalculation('{{ calculation.id }}')">
+                                            <i data-feather="trash-2" class="me-2"></i>Excluir
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">{{ calculation.created_at.strftime('%d/%m/%Y') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if calculations.pages > 1 %}
+    <nav aria-label="Navegação de páginas">
+        <ul class="pagination justify-content-center">
+            {% if calculations.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('calculation_history', page=calculations.prev_num) }}">
+                        <i data-feather="chevron-left"></i>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for page_num in calculations.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num != calculations.page %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('calculation_history', page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if calculations.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('calculation_history', page=calculations.next_num) }}">
+                        <i data-feather="chevron-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-5">
+        <i data-feather="file-text" style="width: 80px; height: 80px; opacity: 0.3;"></i>
+        <h4 class="mt-3 text-muted">Nenhum cálculo encontrado</h4>
+        <p class="text-muted">Você ainda não realizou nenhuma análise de importação.</p>
+        <a href="{{ url_for('new_calculation') }}" class="btn btn-primary mt-3">
+            <i data-feather="plus-circle" class="me-2"></i>
+            Realizar Primeira Análise
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const items = document.querySelectorAll('.calculation-item');
+    
+    items.forEach(item => {
+        const product = item.dataset.product;
+        const ncm = item.dataset.ncm;
+        const isVisible = product.includes(searchTerm) || ncm.includes(searchTerm);
+        item.style.display = isVisible ? 'block' : 'none';
+    });
+});
+
+// Filter by period
+document.getElementById('filterPeriod').addEventListener('change', function() {
+    const days = parseInt(this.value);
+    if (!days) {
+        document.querySelectorAll('.calculation-item').forEach(item => {
+            item.style.display = 'block';
+        });
+        return;
+    }
+    
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - days);
+    
+    document.querySelectorAll('.calculation-item').forEach(item => {
+        const itemDate = new Date(item.dataset.date);
+        item.style.display = itemDate >= cutoffDate ? 'block' : 'none';
+    });
+});
+
+// Sort functionality
+document.getElementById('sortBy').addEventListener('change', function() {
+    const sortBy = this.value;
+    const container = document.getElementById('calculationsList');
+    const items = Array.from(container.children);
+    
+    items.sort((a, b) => {
+        switch(sortBy) {
+            case 'date_desc':
+                return new Date(b.dataset.date) - new Date(a.dataset.date);
+            case 'date_asc':
+                return new Date(a.dataset.date) - new Date(b.dataset.date);
+            case 'product_asc':
+                return a.dataset.product.localeCompare(b.dataset.product);
+            case 'cost_desc':
+                return parseFloat(b.dataset.cost) - parseFloat(a.dataset.cost);
+            default:
+                return 0;
+        }
+    });
+    
+    items.forEach(item => container.appendChild(item));
+});
+
+// Delete calculation
+function deleteCalculation(calcId) {
+    if (confirm('Tem certeza que deseja excluir este cálculo? Esta ação não pode ser desfeita.')) {
+        // Implementation would go here
+        console.log('Deleting calculation:', calcId);
+    }
+}
+
+// Duplicate calculation
+function duplicateCalculation(calcId) {
+    // Implementation would go here
+    console.log('Duplicating calculation:', calcId);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Calculadora de Importação{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Welcome Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>Bem-vindo, {{ current_user.name or 'Usuário' }}!</h2>
+            <p class="text-muted">Gerencie suas análises de importação e acompanhe seus resultados</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="text-primary mb-2">
+                        <i data-feather="calculator" style="width: 40px; height: 40px;"></i>
+                    </div>
+                    <h4 class="card-title">{{ total_calculations }}</h4>
+                    <p class="card-text text-muted">Cálculos Realizados</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="text-success mb-2">
+                        <i data-feather="bookmark" style="width: 40px; height: 40px;"></i>
+                    </div>
+                    <h4 class="card-title">{{ saved_scenarios }}</h4>
+                    <p class="card-text text-muted">Cenários Salvos</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="text-info mb-2">
+                        <i data-feather="trending-up" style="width: 40px; height: 40px;"></i>
+                    </div>
+                    <h4 class="card-title" id="current-rate">-</h4>
+                    <p class="card-text text-muted">Cotação USD/BRL</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <div class="text-warning mb-2">
+                        <i data-feather="calendar" style="width: 40px; height: 40px;"></i>
+                    </div>
+                    <h4 class="card-title">{{ recent_calculations|length }}</h4>
+                    <p class="card-text text-muted">Esta Semana</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quick Actions -->
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i data-feather="zap" class="me-2"></i>Ações Rápidas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <a href="{{ url_for('new_calculation') }}" class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                <i data-feather="plus-circle" class="me-2"></i>
+                                Nova Análise de Importação
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ url_for('saved_scenarios') }}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                <i data-feather="bookmark" class="me-2"></i>
+                                Usar Cenário Salvo
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ url_for('calculation_history') }}" class="btn btn-outline-secondary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                <i data-feather="clock" class="me-2"></i>
+                                Ver Histórico
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-info btn-lg w-100 d-flex align-items-center justify-content-center" onclick="showNCMHelper()">
+                                <i data-feather="search" class="me-2"></i>
+                                Buscar NCM
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Calculations -->
+            {% if recent_calculations %}
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5><i data-feather="clock" class="me-2"></i>Cálculos Recentes</h5>
+                    <a href="{{ url_for('calculation_history') }}" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+                </div>
+                <div class="card-body">
+                    {% for calculation in recent_calculations %}
+                    <div class="d-flex justify-content-between align-items-center py-2 {% if not loop.last %}border-bottom{% endif %}">
+                        <div>
+                            <h6 class="mb-1">{{ calculation.product_name }}</h6>
+                            <small class="text-muted">
+                                NCM: {{ calculation.ncm_code }} • 
+                                {{ calculation.quantity }} un. • 
+                                {{ calculation.created_at.strftime('%d/%m/%Y') }}
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold text-success">R$ {{ "{:,.2f}"|format(calculation.final_cost_brl) }}</div>
+                            <a href="{{ url_for('calculation_results', calc_id=calculation.id) }}" class="btn btn-sm btn-outline-primary">
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Tips Card -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6><i data-feather="lightbulb" class="me-2"></i>Dicas Úteis</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i data-feather="check-circle" class="me-2 text-success"></i>
+                            <small>Salve cenários dos produtos mais importados</small>
+                        </li>
+                        <li class="mb-2">
+                            <i data-feather="check-circle" class="me-2 text-success"></i>
+                            <small>Monitore a cotação do dólar diariamente</small>
+                        </li>
+                        <li class="mb-2">
+                            <i data-feather="check-circle" class="me-2 text-success"></i>
+                            <small>Considere custos de armazenagem na análise</small>
+                        </li>
+                        <li class="mb-0">
+                            <i data-feather="check-circle" class="me-2 text-success"></i>
+                            <small>Verifique atualizações na legislação tributária</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Account Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h6><i data-feather="user" class="me-2"></i>Informações da Conta</h6>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-6">Nome:</dt>
+                        <dd class="col-6">{{ current_user.name or 'Não informado' }}</dd>
+                        
+                        <dt class="col-6">E-mail:</dt>
+                        <dd class="col-6">{{ current_user.email }}</dd>
+                        
+                        {% if current_user.company %}
+                        <dt class="col-6">Empresa:</dt>
+                        <dd class="col-6">{{ current_user.company }}</dd>
+                        {% endif %}
+                        
+                        <dt class="col-6">Tipo:</dt>
+                        <dd class="col-6">
+                            {% if current_user.user_type == 'IMPORTER' %}Importador
+                            {% elif current_user.user_type == 'TAX_CONSULTANT' %}Consultor Tributário
+                            {% elif current_user.user_type == 'ADMIN' %}Administrador
+                            {% endif %}
+                        </dd>
+                        
+                        <dt class="col-6">Membro desde:</dt>
+                        <dd class="col-6">{{ current_user.created_at.strftime('%m/%Y') }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NCM Helper Modal -->
+<div class="modal fade" id="ncmHelperModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buscar Código NCM</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Digite o nome do produto ou código NCM:</label>
+                    <input type="text" class="form-control" id="ncmSearchInput" placeholder="Ex: smartphone, 85171200, tênis...">
+                </div>
+                <div id="ncmSearchResults" class="border rounded p-3" style="min-height: 200px; display: none;">
+                    <div class="text-center text-muted">
+                        <i data-feather="search"></i>
+                        <p class="mt-2">Digite para buscar códigos NCM</p>
+                    </div>
+                </div>
+                <div id="ncmSearchLoading" class="text-center py-4" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Buscando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Load current exchange rate
+fetch('/api/cotacao')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('current-rate').textContent = data.formatted;
+    })
+    .catch(error => {
+        document.getElementById('current-rate').textContent = 'R$ 5,00';
+    });
+
+// NCM Helper
+function showNCMHelper() {
+    new bootstrap.Modal(document.getElementById('ncmHelperModal')).show();
+}
+
+// NCM Search functionality
+let searchTimeout;
+document.getElementById('ncmSearchInput').addEventListener('input', function() {
+    const query = this.value.trim();
+    
+    clearTimeout(searchTimeout);
+    
+    if (query.length < 3) {
+        document.getElementById('ncmSearchResults').style.display = 'none';
+        return;
+    }
+    
+    document.getElementById('ncmSearchLoading').style.display = 'block';
+    document.getElementById('ncmSearchResults').style.display = 'none';
+    
+    searchTimeout = setTimeout(() => {
+        fetch(`/api/ncm/buscar?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ncmSearchLoading').style.display = 'none';
+                
+                const resultsDiv = document.getElementById('ncmSearchResults');
+                
+                if (data.length === 0) {
+                    resultsDiv.innerHTML = `
+                        <div class="text-center text-muted">
+                            <i data-feather="alert-circle"></i>
+                            <p class="mt-2">Nenhum resultado encontrado</p>
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = data.map(item => `
+                        <div class="border-bottom py-2">
+                            <div class="fw-bold">${item.code}</div>
+                            <div class="text-muted small">${item.description}</div>
+                        </div>
+                    `).join('');
+                }
+                
+                resultsDiv.style.display = 'block';
+                feather.replace(); // Re-initialize feather icons
+            })
+            .catch(error => {
+                document.getElementById('ncmSearchLoading').style.display = 'none';
+                console.error('Erro na busca NCM:', error);
+            });
+    }, 500);
+});
+</script>
+{% endblock %}
