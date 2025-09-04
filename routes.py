@@ -152,6 +152,12 @@ def reset_password(token):
     return render_template('auth/reset_password.html', form=form, token=token)
 
 # Rotas do Calculador
+@app.route('/calculate')
+@login_required
+def calculate_redirect():
+    """Redireciona para nova análise"""
+    return redirect(url_for('new_calculation'))
+
 @app.route('/nova-analise')
 @login_required
 def new_calculation():
