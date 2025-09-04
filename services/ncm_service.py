@@ -198,7 +198,47 @@ class NCMService:
             'automóvel': ['carro', 'veículo', 'motor', 'car'],
             'carro': ['automóvel', 'veículo', 'car'],
             'moto': ['motocicleta', 'motorcycle', 'veículo'],
-            'peça': ['part', 'acessório', 'componente']
+            'peça': ['part', 'acessório', 'componente'],
+            
+            # QUÍMICOS E PRODUTOS QUÍMICOS - EXPANDIDO
+            'químico': ['produto químico', 'chemical', 'reagente', 'ácido', 'solvente', 'corante', 'pigmento', 'tinta', 'detergente'],
+            'ácido': ['químico', 'reagente', 'acid', 'chemical', 'corrosivo', 'industrial'],
+            'solvente': ['químico', 'thinner', 'diluente', 'chemical', 'industrial'],
+            'tinta': ['pigmento', 'corante', 'paint', 'químico', 'verniz', 'esmalte'],
+            'detergente': ['produto limpeza', 'químico', 'soap', 'sabão', 'limpeza'],
+            'corante': ['pigmento', 'tinta', 'dye', 'químico'],
+            'pigmento': ['corante', 'tinta', 'químico', 'colorante'],
+            'cloro': ['químico', 'desinfetante', 'chlorine'],
+            'enxofre': ['químico', 'sulfur', 'industrial'],
+            
+            # FARMACÊUTICOS E MEDICAMENTOS - EXPANDIDO
+            'remédio': ['medicamento', 'medicine', 'drug', 'farmacêutico', 'comprimido', 'cápsula', 'pílula'],
+            'medicamento': ['remédio', 'medicine', 'drug', 'farmacêutico', 'pharmaceutical'],
+            'antibiótico': ['medicamento', 'penicilina', 'medicine', 'antibiotic'],
+            'penicilina': ['antibiótico', 'medicamento', 'penicillin'],
+            'vitamina': ['suplemento', 'medicamento', 'vitamin', 'nutritional'],
+            'suplemento': ['vitamina', 'medicamento', 'supplement', 'nutricional'],
+            'insulina': ['medicamento', 'diabético', 'hormone', 'insulin'],
+            'vacina': ['imunização', 'medicamento', 'vaccine', 'immunization'],
+            'soro': ['medicamento', 'serum', 'antissoro'],
+            'comprimido': ['medicamento', 'pílula', 'tablet', 'pill'],
+            'cápsula': ['medicamento', 'remédio', 'capsule'],
+            
+            # UTENSÍLIOS DOMÉSTICOS ESPECÍFICOS - EXPANDIDO
+            'panela': ['utensílio', 'cozinha', 'cooking', 'pan', 'pot'],
+            'frigideira': ['panela', 'utensílio', 'cozinha', 'frying pan'],
+            'prato': ['utensílio', 'cozinha', 'louça', 'dish', 'plate'],
+            'copo': ['utensílio', 'vidro', 'bebida', 'glass', 'cup'],
+            'garfo': ['talher', 'utensílio', 'fork', 'cutlery'],
+            'faca': ['talher', 'utensílio', 'knife', 'cutlery'],
+            'colher': ['talher', 'utensílio', 'spoon', 'cutlery'],
+            'talher': ['garfo', 'faca', 'colher', 'cutlery', 'utensílio'],
+            'microondas': ['eletrodoméstico', 'microwave', 'forno'],
+            'cafeteira': ['eletrodoméstico', 'coffee maker', 'café'],
+            'torradeira': ['eletrodoméstico', 'toaster', 'pão'],
+            'ferro': ['eletrodoméstico', 'iron', 'passar roupa'],
+            'aspirador': ['eletrodoméstico', 'vacuum', 'limpeza'],
+            'detergente doméstico': ['produto limpeza', 'sabão', 'dish soap']
         }
         
         # Adicionar expansões baseadas no mapeamento
