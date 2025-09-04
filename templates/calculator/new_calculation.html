@@ -50,6 +50,11 @@
                                 <i data-feather="help-circle"></i>
                             </button>
                         </label>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="ncm-search" 
+                                   placeholder="Digite o nome do produto para buscar NCM (ex: smartphone, tênis, bolsa)">
+                            <div id="ncm-search-results" class="dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                        </div>
                         {{ product_form.ncm_code() }}
                         <datalist id="ncm-suggestions"></datalist>
                         <div id="ncm-info" class="small text-muted mt-1"></div>
@@ -207,30 +212,99 @@
 
 {% block scripts %}
 <script>
-// NCM Search functionality
-document.getElementById('{{ product_form.ncm_code.id }}').addEventListener('input', function() {
-    const query = this.value;
-    if (query.length >= 3) {
-        fetch(`/api/ncm/buscar?q=${encodeURIComponent(query)}`)
+document.addEventListener('DOMContentLoaded', function() {
+    // NCM Search functionality
+    const ncmSearchInput = document.getElementById('ncm-search');
+    const ncmCodeInput = document.getElementById('{{ product_form.ncm_code.id }}');
+    const searchResults = document.getElementById('ncm-search-results');
+    let searchTimeout;
+
+    // Busca inteligente de NCM por nome do produto
+    ncmSearchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        
+        if (query.length < 3) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        // Debounce search
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchNCM(query);
+        }, 300);
+    });
+
+    function searchNCM(query) {
+        fetch(`/api/search_ncm?q=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
-                const datalist = document.getElementById('ncm-suggestions');
-                datalist.innerHTML = '';
-                data.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item.code;
-                    option.textContent = `${item.code} - ${item.description}`;
-                    datalist.appendChild(option);
-                });
+                displaySearchResults(data);
             })
-            .catch(error => console.error('Erro ao buscar NCM:', error));
+            .catch(error => {
+                console.error('Erro na busca NCM:', error);
+                searchResults.style.display = 'none';
+            });
     }
-});
 
-// NCM Info display
-document.getElementById('{{ product_form.ncm_code.id }}').addEventListener('blur', function() {
-    const ncmCode = this.value.replace(/\D/g, '');
-    if (ncmCode.length === 8) {
+    function displaySearchResults(results) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '<div class="dropdown-item-text text-muted p-3">Nenhum NCM encontrado para esta busca</div>';
+            searchResults.style.display = 'block';
+            return;
+        }
+
+        const html = results.map(result => `
+            <button type="button" class="dropdown-item ncm-option" 
+                    data-code="${result.code}" 
+                    data-description="${result.description}">
+                <div class="fw-bold text-primary">${result.code}</div>
+                <div class="text-muted small">${result.description}</div>
+            </button>
+        `).join('');
+
+        searchResults.innerHTML = html;
+        searchResults.style.display = 'block';
+
+        // Add click handlers to results
+        searchResults.querySelectorAll('.ncm-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const code = this.dataset.code;
+                const description = this.dataset.description;
+                
+                ncmCodeInput.value = code;
+                ncmSearchInput.value = '';
+                searchResults.style.display = 'none';
+                
+                // Update info
+                document.getElementById('ncm-info').innerHTML = `
+                    <strong>Descrição:</strong> ${description}<br>
+                    <small class="text-success">NCM selecionado com sucesso</small>
+                `;
+            });
+        });
+    }
+
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!ncmSearchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // NCM Code direct input validation
+    ncmCodeInput.addEventListener('input', function() {
+        const ncmCode = this.value.replace(/[^\d]/g, '').slice(0, 8);
+        this.value = ncmCode;
+        
+        if (ncmCode.length === 8) {
+            validateNCM(ncmCode);
+        } else {
+            document.getElementById('ncm-info').innerHTML = '';
+        }
+    });
+
+    function validateNCM(ncmCode) {
         fetch(`/api/ncm/${ncmCode}`)
             .then(response => response.json())
             .then(data => {
