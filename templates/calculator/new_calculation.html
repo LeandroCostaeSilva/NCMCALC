@@ -52,7 +52,7 @@
                         </label>
                         <div class="mb-2">
                             <input type="text" class="form-control" id="ncm-search" 
-                                   placeholder="Digite o nome do produto para buscar NCM (ex: smartphone, tênis, bolsa)">
+                                   placeholder="Busca automática baseada no nome do produto ou digite aqui (ex: smartphone, tênis, bolsa)">
                             <div id="ncm-search-results" class="dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
                         </div>
                         {{ product_form.ncm_code() }}
@@ -216,10 +216,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // NCM Search functionality
     const ncmSearchInput = document.getElementById('ncm-search');
     const ncmCodeInput = document.getElementById('{{ product_form.ncm_code.id }}');
+    const productNameInput = document.getElementById('{{ product_form.product_name.id }}');
     const searchResults = document.getElementById('ncm-search-results');
     let searchTimeout;
 
-    // Busca inteligente de NCM por nome do produto
+    // Busca inteligente de NCM por nome do produto (campo de busca específico)
     ncmSearchInput.addEventListener('input', function() {
         const query = this.value.trim();
         
@@ -235,8 +236,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     });
 
+    // Integração com campo Nome do Produto - busca automática de NCM
+    productNameInput.addEventListener('input', function() {
+        const productName = this.value.trim();
+        
+        if (productName.length >= 3) {
+            // Auto-popular o campo de busca NCM
+            ncmSearchInput.value = productName;
+            
+            // Realizar busca automaticamente
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchNCM(productName);
+            }, 500); // Delay maior para não sobrecarregar durante digitação
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
     function searchNCM(query) {
-        fetch(`/api/search_ncm?q=${encodeURIComponent(query)}`)
+        fetch(`/api/ncm/buscar?q=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 displaySearchResults(data);
