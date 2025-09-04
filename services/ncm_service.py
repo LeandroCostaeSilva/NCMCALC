@@ -17,104 +17,14 @@ class NCMService:
     
     def _load_ncm_database(self) -> Dict[str, Dict]:
         """
-        Carrega base de dados NCM com códigos organizados por categoria
+        Carrega base de dados NCM expandida com milhares de códigos organizados por categoria
         """
-        return {
-            # ELETRÔNICOS E TECNOLOGIA
-            '85171200': {'description': 'Telefones para redes celulares ou outras redes sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.25},
-            '85176200': {'description': 'Aparelhos receptores para radiotelefonia ou radiotelegrafia', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.25},
-            '85171100': {'description': 'Telefones móveis celulares e smartphones', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.25},
-            '85444200': {'description': 'Cabos coaxiais e outros condutores elétricos coaxiais', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85234900': {'description': 'Outros discos, fitas e outros suportes para gravação de som ou gravações análogas', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85287200': {'description': 'Aparelhos receptores para televisão, mesmo incorporando um aparelho receptor de radiodifusão ou um aparelho de gravação ou reprodução de som ou imagens', 'ii_rate': 0.20, 'ipi_rate': 0.20, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '84713000': {'description': 'Máquinas automáticas para processamento de dados, portáteis', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '84714100': {'description': 'Máquinas automáticas para processamento de dados que contenham, numa mesma unidade, pelo menos uma unidade central de processamento, uma unidade de entrada e uma unidade de saída', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85258000': {'description': 'Câmeras de televisão, câmeras fotográficas digitais e câmeras de vídeo', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # VESTUÁRIO E MODA
-            '62034200': {'description': 'Calças, jardineiras, bermudas e shorts, de algodão, para homens ou rapazes', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '61103000': {'description': 'Suéteres, pulôveres, cardigãs, coletes e artigos semelhantes, de fibras sintéticas ou artificiais', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '62052000': {'description': 'Camisas de fibras sintéticas ou artificiais, para homens ou rapazes', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '62046200': {'description': 'Calças, jardineiras, bermudas e shorts, de algodão, para mulheres ou meninas', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '61051000': {'description': 'Camisas de malha de algodão, para homens ou rapazes', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '61091000': {'description': 'T-shirts, camisetas interiores e artigos semelhantes de malha de algodão', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '62033100': {'description': 'Paletós (casacos) de lã ou pelos finos, para homens ou rapazes', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '62114200': {'description': 'Macacões (fatos-macacos) e conjuntos de esqui, de fibras sintéticas ou artificiais para mulheres ou meninas', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '61124000': {'description': 'Maiôs e biquínis de malha de fibras sintéticas ou artificiais', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '62121000': {'description': 'Soutiens (sutiãs) de qualquer matéria têxtil', 'ii_rate': 0.35, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # CALÇADOS E ACESSÓRIOS
-            '64039900': {'description': 'Outros calçados com sola de borracha, plástico, couro natural ou reconstituído', 'ii_rate': 0.35, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '64041900': {'description': 'Outros calçados com sola de borracha ou plástico', 'ii_rate': 0.35, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '64032000': {'description': 'Outros calçados com sola de couro natural e parte superior que cubra o tornozelo', 'ii_rate': 0.35, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '64051000': {'description': 'Outros calçados com parte superior de couro natural', 'ii_rate': 0.35, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '90041000': {'description': 'Óculos de sol', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '90031900': {'description': 'Outras armações de óculos e armações semelhantes', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '71131900': {'description': 'Outros artigos de joalharia de metais preciosos', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '71171900': {'description': 'Bijuterias de outros metais comuns', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # ARTIGOS DE COURO E BAGAGEM
-            '42021200': {'description': 'Malas, maletas e artigos semelhantes, com superfície exterior de plástico ou matérias têxteis', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '42021100': {'description': 'Malas, maletas e artigos semelhantes, com superfície exterior de couro natural, couro reconstituído ou couro envernizado', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '42022100': {'description': 'Bolsas, mesmo com alça, normalmente carregadas na mão, com superfície exterior de couro natural, couro reconstituído ou couro envernizado', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '42022200': {'description': 'Bolsas, mesmo com alça, normalmente carregadas na mão, com superfície exterior de folhas de plástico ou matérias têxteis', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '42023100': {'description': 'Artigos de bolso ou de bolsa de mão, com superfície exterior de couro natural, couro reconstituído ou couro envernizado', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '42031000': {'description': 'Vestuário de couro natural ou couro reconstituído', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # AUTOMÓVEIS E VEÍCULOS
-            '87032300': {'description': 'Automóveis com motor alternativo de ignição por centelha, cilindrada > 1500 cm3 mas <= 3000 cm3', 'ii_rate': 0.35, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '87032100': {'description': 'Automóveis com motor alternativo de ignição por centelha, cilindrada <= 1000 cm3', 'ii_rate': 0.35, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '87032200': {'description': 'Automóveis com motor alternativo de ignição por centelha, cilindrada > 1000 cm3 mas <= 1500 cm3', 'ii_rate': 0.35, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '87033100': {'description': 'Automóveis com motor diesel ou semi-diesel, cilindrada <= 1500 cm3', 'ii_rate': 0.35, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '87089900': {'description': 'Outras partes e acessórios de carrocerias para veículos automóveis', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '87141000': {'description': 'Partes e acessórios de motocicletas', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # CASA E JARDIM
-            '73211100': {'description': 'Aparelhos de cozinhar e aquecedores de pratos, de ferro fundido, ferro ou aço', 'ii_rate': 0.20, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '73239300': {'description': 'Outros artigos de mesa, cozinha ou outros utensílios domésticos, de aço inoxidável', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '94036000': {'description': 'Outros móveis de madeira', 'ii_rate': 0.20, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '94035000': {'description': 'Móveis de madeira dos tipos utilizados em dormitórios', 'ii_rate': 0.20, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '94054000': {'description': 'Outros aparelhos de iluminação elétrica', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '94017900': {'description': 'Outros assentos com armação de metal', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '68022900': {'description': 'Outras pedras de cantaria ou de construção trabalhadas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '63049200': {'description': 'Outros artigos de cama, de fibras sintéticas ou artificiais', 'ii_rate': 0.20, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # BRINQUEDOS E JOGOS
-            '95030000': {'description': 'Brinquedos de madeira', 'ii_rate': 0.20, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95032000': {'description': 'Brinquedos com motor elétrico', 'ii_rate': 0.20, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95034900': {'description': 'Outros jogos de construção', 'ii_rate': 0.20, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95051000': {'description': 'Artigos para festas de Natal', 'ii_rate': 0.20, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95089000': {'description': 'Outros carrosséis, balanços, barracas de tiro ao alvo e outras diversões de parque', 'ii_rate': 0.20, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # COSMÉTICOS E CUIDADOS PESSOAIS
-            '33049900': {'description': 'Outros produtos de beleza, maquiagem e cuidados da pele', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '33051000': {'description': 'Xampus', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '33053000': {'description': 'Lacas para o cabelo', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '33059000': {'description': 'Outras preparações capilares', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '33061000': {'description': 'Dentifrícios', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '33079000': {'description': 'Outras preparações para barbear, desodorantes corporais e antitranspirantes', 'ii_rate': 0.18, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '34011100': {'description': 'Sabões e produtos orgânicos tensoativos para uso na forma de barras, pães, pedaços moldados ou formas semelhantes', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # FERRAMENTAS E EQUIPAMENTOS
-            '82013000': {'description': 'Picaretas, pás, cavadeiras, enxadas, sachos, forcados, forquilhas, ancinhos e raspadeiras', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '82032000': {'description': 'Alicates, tenazes, pinças e ferramentas semelhantes', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '82054000': {'description': 'Chaves de fenda', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '82055100': {'description': 'Outras ferramentas de mão dos tipos utilizados na agricultura, horticultura ou silvicultura', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '84669200': {'description': 'Partes e acessórios para máquinas-ferramentas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # ARTIGOS ESPORTIVOS
-            '95069100': {'description': 'Artigos e equipamentos para ginástica, atletismo, outros esportes ou jogos ao ar livre', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95062900': {'description': 'Outras bolas infláveis', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95065100': {'description': 'Raquetes de tênis, mesmo não encordoadas', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '95067000': {'description': 'Patins de gelo e patins de rodas', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            
-            # PRODUTOS ALIMENTÍCIOS
-            '21069000': {'description': 'Outras preparações alimentícias', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '18063200': {'description': 'Outros chocolates e outras preparações alimentícias que contenham cacau, em blocos, tabletes ou barras, com peso superior a 2 kg', 'ii_rate': 0.20, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '19053200': {'description': 'Bolachas doces (biscoitos doces) e waffles e wafers', 'ii_rate': 0.18, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '20019000': {'description': 'Outras preparações de produtos hortícolas, fruta ou de outras partes de plantas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12},
-            '22021000': {'description': 'Águas, incluindo as águas minerais e as águas gaseificadas', 'ii_rate': 0.20, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.12}
-        }
+        # Importar base expandida do scraper
+        from web_scraper import ncm_scraper
+        expanded_db = ncm_scraper.get_expanded_ncm_database()
+        
+        # Retornar base expandida diretamente
+        return expanded_db
     
     def search_ncm(self, query: str) -> List[Dict[str, str]]:
         """
@@ -181,29 +91,114 @@ class NCMService:
         query = query.lower()
         expansions = [query]
         
-        # Mapeamento de termos comuns para NCM
+        # Mapeamento massivamente expandido de termos comuns para NCM
         term_mapping = {
-            'celular': ['telefone', 'smartphone', 'móvel'],
-            'smartphone': ['telefone', 'celular', 'móvel'],
-            'camiseta': ['t-shirt', 'camisa', 'blusa'],
-            'tênis': ['calçado', 'sapato', 'esportivo'],
-            'sapato': ['calçado', 'tênis'],
-            'bolsa': ['mala', 'bagagem', 'artigo couro'],
-            'mala': ['bolsa', 'bagagem', 'viagem'],
-            'computador': ['máquina processamento', 'notebook', 'laptop'],
-            'notebook': ['computador', 'laptop', 'portátil'],
-            'brinquedo': ['jogos', 'diversão', 'criança'],
-            'cosmético': ['beleza', 'maquiagem', 'cuidado'],
-            'perfume': ['fragrância', 'cosmético'],
-            'relógio': ['tempo', 'cronômetro'],
-            'óculos': ['solar', 'vista', 'armação'],
-            'automóvel': ['carro', 'veículo', 'motor'],
-            'carro': ['automóvel', 'veículo'],
-            'móvel': ['mobiliário', 'casa', 'madeira'],
-            'ferramenta': ['equipamento', 'utensílio'],
-            'roupa': ['vestuário', 'têxtil', 'confecção'],
-            'alimento': ['comida', 'alimentício', 'preparação'],
-            'bebida': ['líquido', 'água', 'refrigerante']
+            # ELETRÔNICOS E TECNOLOGIA
+            'celular': ['telefone', 'smartphone', 'móvel', 'cellular', 'phone', 'iphone', 'android', 'galaxy', 'xiaomi'],
+            'smartphone': ['telefone', 'celular', 'móvel', 'phone', 'iphone', 'android', 'galaxy', 'samsung'],
+            'telefone': ['celular', 'smartphone', 'móvel', 'phone'],
+            'computador': ['máquina processamento', 'notebook', 'laptop', 'pc', 'desktop', 'cpu', 'processamento dados'],
+            'notebook': ['computador', 'laptop', 'portátil', 'ultrabook', 'macbook'],
+            'laptop': ['notebook', 'computador', 'portátil', 'ultrabook'],
+            'tablet': ['ipad', 'computador', 'portátil', 'eletrônico'],
+            'tv': ['televisão', 'televisor', 'aparelho receptor', 'smart tv'],
+            'televisão': ['tv', 'televisor', 'aparelho receptor', 'smart tv'],
+            'câmera': ['camera', 'fotográfica', 'digital', 'vídeo', 'filmadora'],
+            'fone': ['headphone', 'earphone', 'ouvido', 'áudio'],
+            'headphone': ['fone', 'ouvido', 'áudio'],
+            
+            # VESTUÁRIO E MODA
+            'camiseta': ['t-shirt', 'camisa', 'blusa', 'malha', 'algodão'],
+            'camisa': ['camiseta', 't-shirt', 'blusa', 'social'],
+            'calça': ['pants', 'jeans', 'bermuda', 'short', 'jardineira'],
+            'jeans': ['calça', 'denim', 'pants'],
+            'vestido': ['dress', 'feminino', 'roupa mulher'],
+            'saia': ['skirt', 'feminino', 'roupa mulher'],
+            'blusa': ['camisa', 'camiseta', 'feminino', 'roupa mulher'],
+            'suéter': ['pullover', 'cardigan', 'colete', 'malha'],
+            'casaco': ['paletó', 'jaqueta', 'agasalho', 'sobretudo'],
+            'maiô': ['biquíni', 'swimsuit', 'banho'],
+            'biquíni': ['maiô', 'swimsuit', 'banho'],
+            'sutiã': ['soutien', 'lingerie', 'íntimo feminino'],
+            'calcinha': ['lingerie', 'íntimo feminino'],
+            'cueca': ['íntimo masculino', 'underwear'],
+            
+            # CALÇADOS
+            'tênis': ['calçado', 'sapato', 'esportivo', 'sneaker', 'running', 'esporte'],
+            'sapato': ['calçado', 'shoe', 'social', 'couro'],
+            'sandália': ['calçado', 'sandal', 'chinelo'],
+            'bota': ['boot', 'calçado', 'couro'],
+            'chinelo': ['sandália', 'flip-flop', 'calçado'],
+            
+            # BOLSAS E ACESSÓRIOS
+            'bolsa': ['mala', 'bagagem', 'artigo couro', 'bag', 'handbag', 'feminino'],
+            'mala': ['bolsa', 'bagagem', 'viagem', 'suitcase', 'travel'],
+            'carteira': ['wallet', 'couro', 'acessório'],
+            'cinto': ['belt', 'couro', 'acessório'],
+            'relógio': ['watch', 'tempo', 'cronômetro', 'pulso'],
+            'óculos': ['glasses', 'solar', 'vista', 'armação', 'ray-ban'],
+            'joias': ['joia', 'jewelry', 'ouro', 'prata', 'bijuteria'],
+            'bijuteria': ['joia', 'jewelry', 'acessório'],
+            
+            # CASA E MÓVEIS
+            'móvel': ['mobiliário', 'casa', 'madeira', 'furniture'],
+            'mesa': ['table', 'móvel', 'madeira'],
+            'cadeira': ['chair', 'assento', 'móvel'],
+            'sofá': ['sofa', 'móvel', 'estofado'],
+            'cama': ['bed', 'móvel', 'dormitório'],
+            'guarda-roupa': ['armário', 'móvel', 'dormitório'],
+            'luminária': ['lâmpada', 'iluminação', 'abajur'],
+            'espelho': ['mirror', 'vidro', 'casa'],
+            'panela': ['utensílio', 'cozinha', 'cooking'],
+            'prato': ['utensílio', 'cozinha', 'louça'],
+            
+            # BRINQUEDOS E JOGOS
+            'brinquedo': ['toy', 'jogos', 'diversão', 'criança', 'infantil'],
+            'boneca': ['doll', 'brinquedo', 'criança'],
+            'carrinho': ['toy car', 'brinquedo', 'criança'],
+            'lego': ['blocos', 'construção', 'brinquedo'],
+            'quebra-cabeça': ['puzzle', 'jogo', 'brinquedo'],
+            'videogame': ['console', 'game', 'eletrônico', 'playstation', 'xbox'],
+            
+            # COSMÉTICOS E PERFUMARIA
+            'cosmético': ['beleza', 'maquiagem', 'cuidado', 'beauty'],
+            'perfume': ['fragrância', 'cosmético', 'colônia'],
+            'batom': ['lipstick', 'maquiagem', 'lábios'],
+            'base': ['foundation', 'maquiagem', 'rosto'],
+            'shampoo': ['xampu', 'cabelo', 'higiene'],
+            'condicionador': ['cabelo', 'higiene'],
+            'creme': ['loção', 'hidratante', 'pele'],
+            'protetor solar': ['sunscreen', 'proteção', 'pele'],
+            'desodorante': ['antitranspirante', 'higiene'],
+            'sabonete': ['soap', 'higiene', 'banho'],
+            
+            # ESPORTES
+            'bola': ['ball', 'futebol', 'basquete', 'vôlei'],
+            'raquete': ['racket', 'tênis', 'badminton'],
+            'equipamento esportivo': ['sport', 'exercício', 'ginástica'],
+            'patins': ['skate', 'rodas', 'esporte'],
+            'bicicleta': ['bike', 'ciclismo', 'esporte'],
+            'prancha': ['surf', 'esporte aquático'],
+            
+            # ALIMENTOS E BEBIDAS
+            'alimento': ['comida', 'alimentício', 'preparação', 'food'],
+            'bebida': ['líquido', 'água', 'refrigerante', 'drink'],
+            'chocolate': ['doce', 'cacau', 'sweet'],
+            'biscoito': ['cookie', 'bolacha', 'doce'],
+            'água': ['water', 'bebida', 'mineral'],
+            'suco': ['juice', 'bebida', 'fruta'],
+            
+            # FERRAMENTAS
+            'ferramenta': ['tool', 'equipamento', 'utensílio', 'trabalho'],
+            'chave': ['wrench', 'ferramenta', 'fenda'],
+            'martelo': ['hammer', 'ferramenta'],
+            'alicate': ['plier', 'ferramenta'],
+            
+            # AUTOMÓVEIS
+            'automóvel': ['carro', 'veículo', 'motor', 'car'],
+            'carro': ['automóvel', 'veículo', 'car'],
+            'moto': ['motocicleta', 'motorcycle', 'veículo'],
+            'peça': ['part', 'acessório', 'componente']
         }
         
         # Adicionar expansões baseadas no mapeamento
