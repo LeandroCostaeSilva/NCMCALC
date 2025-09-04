@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Calculadora de Importação{% endblock %}</title>
+    <title>{% block title %}NCMCALC - Calculadora de Tributação para Importação{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    
+    <!-- Meta Tags for SEO and Social Sharing -->
+    <meta name="description" content="{% block description %}NCMCALC - Calculadora profissional de tributação para importação no Brasil. Calcule II, IPI, PIS, COFINS, ICMS e analise a rentabilidade de produtos importados com precisão.{% endblock %}">
+    <meta name="keywords" content="NCM, calculadora importação, tributação brasil, impostos importação, II, IPI, PIS, COFINS, ICMS">
+    <meta name="author" content="NCMCALC">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}NCMCALC - Calculadora de Tributação para Importação{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Calcule todos os tributos de importação no Brasil com precisão. Ferramenta profissional para importadores e consultores tributários.{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/logo.png', _external=True) }}">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{% block twitter_title %}NCMCALC - Calculadora de Tributação para Importação{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Calcule todos os tributos de importação no Brasil com precisão.{% endblock %}">
+    <meta property="twitter:image" content="{{ url_for('static', filename='images/logo.png', _external=True) }}">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
@@ -22,9 +44,9 @@
     {% if current_user.is_authenticated %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">
-                <i data-feather="calculator"></i>
-                Calculadora de Importação
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('dashboard') }}">
+                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="NCMCALC" width="32" height="32" class="me-2">
+                <strong>NCMCALC</strong>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
