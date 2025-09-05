@@ -777,7 +777,59 @@ class NCMScraper:
             '84819060': {'description': 'Volantes para válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '84819070': {'description': 'Sedes e obturadores de válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '84819080': {'description': 'Hastes e castelos de válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '84819090': {'description': 'Outras partes de torneiras, válvulas e dispositivos', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '84819090': {'description': 'Outras partes de torneiras, válvulas e dispositivos', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO II - PRODUTOS DO REINO VEGETAL
+            # CAPÍTULO 06 - PLANTAS VIVAS E PRODUTOS DE FLORICULTURA
+            # POSIÇÃO 0604 - FOLHAGEM, FOLHAS, RAMOS E OUTRAS PARTES DE PLANTAS
+            '06041000': {'description': 'Musgos e liquens', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049100': {'description': 'Folhagem, folhas, ramos e outras partes de plantas, frescos', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049200': {'description': 'Folhagem, folhas, ramos e outras partes de plantas, secos, branqueados, tingidos, impregnados ou de outro modo preparados', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CÓDIGOS ESPECÍFICOS DE PLANTAS E FOLHAGEM
+            '06041010': {'description': 'Musgos frescos para decoração', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06041020': {'description': 'Liquens frescos ou secos', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049110': {'description': 'Ramos e folhas frescas para arranjos florais', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049120': {'description': 'Folhagem tropical fresca', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049130': {'description': 'Galhos e ramos decorativos frescos', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049190': {'description': 'Outras folhagens e partes de plantas frescas', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049210': {'description': 'Folhas secas para decoração', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049220': {'description': 'Ramos secos e preparados', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049230': {'description': 'Folhagem tingida ou branqueada', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049240': {'description': 'Plantas preservadas ou estabilizadas', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '06049290': {'description': 'Outras folhagens e partes de plantas preparadas', 'ii_rate': 0.10, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XV - METAIS COMUNS E SUAS OBRAS
+            # CAPÍTULO 82 - FERRAMENTAS E INSTRUMENTOS, ARTIGOS DE CUTELARIA, DE METAIS COMUNS
+            # POSIÇÃO 8201 - FERRAMENTAS MANUAIS
+            '82019000': {'description': 'Outras ferramentas manuais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019010': {'description': 'Pás de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019020': {'description': 'Enxadas de jardim', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019030': {'description': 'Ancinhos de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019040': {'description': 'Cultivadores manuais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019050': {'description': 'Transplantadores de mudas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019060': {'description': 'Ferramentas para poda', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019070': {'description': 'Tesouras de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019080': {'description': 'Ferramentas para capina', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82019090': {'description': 'Outras ferramentas de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # FERRAMENTAS ESPECÍFICAS DE JARDINAGEM E HORTICULTURA
+            '82013000': {'description': 'Enxadas, picaretas, sacholas, anchos e ferramentas semelhantes', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82014000': {'description': 'Machados, podões e ferramentas semelhantes para cortar', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82015000': {'description': 'Ferramentas de uso manual para corte, incluindo tesouras de podar', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82016000': {'description': 'Tesouras de tosquiar e aparelhos semelhantes', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CÓDIGOS ESPECÍFICOS PARA DIFERENTES TIPOS DE FERRAMENTAS
+            '82013010': {'description': 'Enxadas com cabo de madeira', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82013020': {'description': 'Sacholas para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82013030': {'description': 'Anchos e cultivadores manuais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82013090': {'description': 'Outras ferramentas de escavação', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82014010': {'description': 'Podões e tesouras de poda', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82014020': {'description': 'Serras de poda manual', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82014090': {'description': 'Outras ferramentas de corte para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82015010': {'description': 'Tesouras de jardinagem pequenas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82015020': {'description': 'Alicates de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '82015090': {'description': 'Outras tesouras manuais para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço

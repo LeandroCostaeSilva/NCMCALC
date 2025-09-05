@@ -446,7 +446,45 @@ class NCMService:
             'sistema pneumático': ['pneumatic system', 'ar comprimido', 'pressão ar'],
             'equipamento hidráulico': ['hydraulic equipment', 'maquinário hidráulico', 'sistema pressão'],
             'controle fluxo': ['flow control', 'regulagem vazão', 'modulação'],
-            'redução pressão': ['pressure reduction', 'regulagem pressão', 'controle pressão']
+            'redução pressão': ['pressure reduction', 'regulagem pressão', 'controle pressão'],
+            
+            # JARDINAGEM E FERRAMENTAS - CAPÍTULO 8201
+            'ferramenta jardinagem': ['garden tool', 'utensílio jardim', 'equipamento horticultura'],
+            'pá jardinagem': ['garden spade', 'shovel', 'escavadeira manual'],
+            'enxada': ['hoe', 'sachola', 'cultivador'],
+            'ancinho': ['rake', 'rastelo', 'vassoura jardim'],
+            'cultivador': ['cultivator', 'escarificador', 'ancinho'],
+            'transplantador': ['transplanter', 'plantador', 'ferramenta mudas'],
+            'podão': ['pruner', 'tesoura poda', 'alicate poda'],
+            'tesoura jardinagem': ['garden scissors', 'pruning shears', 'podadeira'],
+            'serra poda': ['pruning saw', 'serrote jardinagem', 'serra galhos'],
+            'alicate jardinagem': ['garden pliers', 'alicate poda', 'ferramenta corte'],
+            'ferramenta poda': ['pruning tool', 'equipamento poda', 'podadeira'],
+            'ferramenta capina': ['weeding tool', 'capinador', 'removedor ervas'],
+            'sachola': ['hand hoe', 'enxadinha', 'cultivador pequeno'],
+            'ancho': ['mattock', 'picareta jardim', 'ferramenta escavação'],
+            'horticultura': ['gardening', 'cultivo plantas', 'jardinagem'],
+            'jardinagem': ['gardening', 'horticultura', 'cultivo jardim'],
+            
+            # PLANTAS E FOLHAGEM - CAPÍTULO 0604
+            'folhagem': ['foliage', 'folhas', 'verdura'],
+            'folha': ['leaf', 'folhagem', 'verde'],
+            'ramo': ['branch', 'galho', 'ramagem'],
+            'galho': ['branch', 'ramo', 'vara'],
+            'musgo': ['moss', 'briófita', 'vegetação'],
+            'líquen': ['lichen', 'organismo', 'crosta'],
+            'planta seca': ['dried plant', 'planta desidratada', 'preservada'],
+            'planta preservada': ['preserved plant', 'estabilizada', 'tratada'],
+            'folhagem tropical': ['tropical foliage', 'folhas tropicais', 'plantas exóticas'],
+            'arranjo floral': ['floral arrangement', 'buquê', 'decoração flores'],
+            'decoração vegetal': ['plant decoration', 'ornamentação plantas', 'verde decorativo'],
+            'ramo decorativo': ['decorative branch', 'galho ornamental', 'vara decoração'],
+            'folha tingida': ['dyed leaf', 'folhagem colorida', 'folha tratada'],
+            'folha branqueada': ['bleached leaf', 'folhagem clarificada', 'folha processada'],
+            'planta estabilizada': ['stabilized plant', 'preservada', 'tratada'],
+            'verde preservado': ['preserved greenery', 'folhagem tratada', 'planta conservada'],
+            'material vegetal': ['plant material', 'matéria prima vegetal', 'insumo plantas'],
+            'produto floricultura': ['floriculture product', 'artigo flores', 'item floral']
         }
         
         # Adicionar expansões baseadas no mapeamento
