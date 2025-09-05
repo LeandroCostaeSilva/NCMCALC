@@ -281,7 +281,28 @@ class NCMService:
             'sabão': ['detergente', 'limpeza', 'higiene'],
             'detergente': ['sabão', 'limpeza', 'tensoativo'],
             'corante': ['tinta', 'pigmento', 'dye', 'colorante'],
-            'pigmento': ['corante', 'tinta', 'color', 'colorante']
+            'pigmento': ['corante', 'tinta', 'color', 'colorante'],
+            
+            # PRODUTOS QUÍMICOS DIVERSOS - CAPÍTULO 38
+            'fertilizante': ['adubo', 'ureia', 'nitrato', 'NPK'],
+            'adubo': ['fertilizante', 'ureia', 'nitrato', 'NPK'],
+            'ureia': ['fertilizante', 'adubo', 'nitrogênio'],
+            'pesticida': ['inseticida', 'fungicida', 'herbicida', 'agrotóxico'],
+            'inseticida': ['pesticida', 'agrotóxico', 'praguicida'],
+            'fungicida': ['pesticida', 'agrotóxico', 'antifúngico'],
+            'herbicida': ['pesticida', 'agrotóxico', 'mata-mato'],
+            'desinfetante': ['bactericida', 'antisséptico', 'sanitizante'],
+            'adesivo': ['cola', 'fixador', 'aderente'],
+            'cola': ['adesivo', 'fixador', 'caseína'],
+            'gelatina': ['cola animal', 'agar', 'proteína'],
+            'enzima': ['catalisador biológico', 'fermento'],
+            'catalisador': ['acelerador', 'catalyst', 'reação'],
+            'grafita': ['carbono', 'eletrodo', 'grafite'],
+            'carvão ativado': ['filtro', 'adsorção', 'purificação'],
+            'solvente': ['diluente', 'thinner', 'removedor'],
+            'plastificante': ['aditivo plástico', 'flexibilizante'],
+            'antioxidante': ['estabilizador', 'conservante'],
+            'reagente': ['produto laboratório', 'análise química']
         }
         
         # Adicionar expansões baseadas no mapeamento
