@@ -419,12 +419,16 @@ def save_scenario(calc_id):
 @app.route('/api/ncm/buscar')
 def api_search_ncm():
     """API para buscar códigos NCM"""
-    query = request.args.get('q', '').strip()
-    if len(query) < 2:
-        return jsonify([])
-    
-    results = ncm_service.search_ncm(query)
-    return jsonify(results)
+    try:
+        query = request.args.get('q', '').strip()
+        if len(query) < 2:
+            return jsonify([])
+        
+        results = ncm_service.search_ncm(query)
+        return jsonify(results)
+    except Exception as e:
+        logging.error(f"Erro na busca NCM: {str(e)}")
+        return jsonify({"error": "Erro interno na busca de códigos NCM"}), 500
 
 @app.route('/api/ncm/<ncm_code>')
 @login_required

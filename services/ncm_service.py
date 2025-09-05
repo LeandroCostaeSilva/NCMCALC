@@ -302,7 +302,27 @@ class NCMService:
             'solvente': ['diluente', 'thinner', 'removedor'],
             'plastificante': ['aditivo plástico', 'flexibilizante'],
             'antioxidante': ['estabilizador', 'conservante'],
-            'reagente': ['produto laboratório', 'análise química']
+            'reagente': ['produto laboratório', 'análise química'],
+            
+            # PRODUTOS PLÁSTICOS - CAPÍTULO 39
+            'plástico': ['polímero', 'resina', 'polietileno', 'PVC'],
+            'polímero': ['plástico', 'resina', 'polímeros'],
+            'polietileno': ['PE', 'plástico', 'polímero'],
+            'polipropileno': ['PP', 'plástico', 'polímero'],
+            'PVC': ['policloreto vinila', 'plástico', 'polímero'],
+            'poliestireno': ['PS', 'isopor', 'plástico'],
+            'ABS': ['acrilonitrila butadieno estireno', 'plástico'],
+            'policarbonato': ['PC', 'plástico transparente'],
+            'poliamida': ['nylon', 'plástico técnico'],
+            'nylon': ['poliamida', 'plástico técnico'],
+            'PET': ['politereftalato etileno', 'garrafa plástica'],
+            'poliuretano': ['PU', 'espuma', 'elastômero'],
+            'silicone': ['silicones', 'elastômero'],
+            'resina': ['polímero', 'plástico', 'material sintético'],
+            'resina epóxi': ['epoxy', 'adesivo estrutural'],
+            'acrílico': ['PMMA', 'metacrilato', 'transparente'],
+            'isopor': ['poliestireno expandido', 'EPS'],
+            'teflon': ['PTFE', 'politetrafluoroetileno']
         }
         
         # Adicionar expansões baseadas no mapeamento
