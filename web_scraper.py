@@ -683,7 +683,48 @@ class NCMScraper:
             '40121200': {'description': 'Pneus recauchutados de borracha dos tipos utilizados em ônibus ou caminhões', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '40129000': {'description': 'Outros pneus recauchutados de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '40131000': {'description': 'Câmaras de ar de borracha dos tipos utilizados em automóveis de passageiros, ônibus ou caminhões', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '40139000': {'description': 'Outras câmaras de ar de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '40139000': {'description': 'Outras câmaras de ar de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XV - METAIS COMUNS E SUAS OBRAS
+            # CAPÍTULO 76 - ALUMÍNIO E SUAS OBRAS
+            
+            # POSIÇÃO 7608 - TUBOS DE ALUMÍNIO
+            '76081000': {'description': 'Tubos de alumínio, não ligado', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76082000': {'description': 'Tubos de ligas de alumínio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # POSIÇÃO 7610 - CONSTRUÇÕES DE ALUMÍNIO E SUAS PARTES
+            '76101000': {'description': 'Portas, janelas e seus caixilhos, alizares e soleiras', 'ii_rate': 0.18, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76109000': {'description': 'Outras construções de alumínio e partes de construções', 'ii_rate': 0.18, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # POSIÇÃO 7612 - RECIPIENTES DE ALUMÍNIO PARA PRODUTOS COMPRIMIDOS OU LIQUEFEITOS
+            '76120000': {'description': 'Recipientes de alumínio para produtos comprimidos ou liquefeitos, de capacidade não superior a 300 litros', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # CÓDIGOS ADICIONAIS RELACIONADOS À CONSTRUÇÃO CIVIL EM ALUMÍNIO
+            '76041000': {'description': 'Barras de alumínio, não ligado', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76042100': {'description': 'Perfis ocos de ligas de alumínio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76042900': {'description': 'Outros perfis de ligas de alumínio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76051100': {'description': 'Fios de alumínio, não ligado, de maior dimensão da seção transversal superior a 7 mm', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76051900': {'description': 'Outros fios de alumínio, não ligado', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76052100': {'description': 'Fios de ligas de alumínio, de maior dimensão da seção transversal superior a 7 mm', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76052900': {'description': 'Outros fios de ligas de alumínio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76061100': {'description': 'Chapas e tiras de alumínio, não ligado, de espessura superior a 0,2 mm, retangulares', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76061200': {'description': 'Chapas e tiras de alumínio, não ligado, de espessura superior a 0,2 mm, não retangulares', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76069100': {'description': 'Chapas e tiras de ligas de alumínio, de espessura superior a 0,2 mm, retangulares', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76069200': {'description': 'Chapas e tiras de ligas de alumínio, de espessura superior a 0,2 mm, não retangulares', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76071100': {'description': 'Folhas e tiras, delgadas, de alumínio, mesmo impressas ou fixadas sobre papel, cartão, plástico ou suportes semelhantes, de espessura não superior a 0,2 mm, simplesmente laminadas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76071900': {'description': 'Outras folhas e tiras, delgadas, de alumínio, de espessura não superior a 0,2 mm', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76072000': {'description': 'Folhas e tiras, delgadas, de alumínio, fixadas sobre papel, cartão, plástico ou suportes semelhantes', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76090000': {'description': 'Acessórios para tubos de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76110000': {'description': 'Reservatórios, tanques, cubas e recipientes semelhantes, de alumínio, para qualquer matéria', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76130000': {'description': 'Recipientes de alumínio para acondicionamento ou transporte', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76141000': {'description': 'Cabos, cordas e cabos de alumínio, não isolados para eletricidade', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76149000': {'description': 'Outras telas metálicas, grades e redes, de fios de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76151100': {'description': 'Telas metálicas, grades e redes, de fios de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76151900': {'description': 'Outras obras de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76152000': {'description': 'Chapas e tiras, expandidas, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76161000': {'description': 'Tachas, pregos, parafusos, porcas, ganchos roscados, rebites, chavetas, contrapinos, arruelas e artigos semelhantes, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76169100': {'description': 'Telas metálicas, grades e redes, de fios de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '76169900': {'description': 'Outras obras de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço

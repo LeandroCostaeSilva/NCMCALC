@@ -388,7 +388,33 @@ class NCMService:
             'chassi': ['chassis', 'estrutura', 'frame'],
             'tanque combustível': ['reservatório', 'fuel tank', 'combustível'],
             'motor': ['engine', 'propulsor', 'motorização'],
-            'bateria automotiva': ['acumulador automotivo', 'bateria carro']
+            'bateria automotiva': ['acumulador automotivo', 'bateria carro'],
+            
+            # CONSTRUÇÃO CIVIL E ALUMÍNIO - CAPÍTULOS 7608, 7610, 7612
+            'alumínio': ['aluminum', 'liga alumínio', 'metal alumínio'],
+            'construção alumínio': ['estrutura alumínio', 'obra alumínio', 'building'],
+            'tubo alumínio': ['tubulação alumínio', 'pipe', 'conduit'],
+            'perfil alumínio': ['perfil estrutural', 'extrusão', 'profile'],
+            'chapa alumínio': ['folha alumínio', 'placa alumínio', 'sheet'],
+            'barra alumínio': ['vergalhão alumínio', 'rod', 'bar'],
+            'fio alumínio': ['cabo alumínio', 'wire', 'condutor'],
+            'janela alumínio': ['esquadria', 'caixilho', 'window'],
+            'porta alumínio': ['folha porta', 'door frame', 'doorway'],
+            'grade alumínio': ['tela alumínio', 'mesh', 'screen'],
+            'parafuso alumínio': ['porca alumínio', 'rebite', 'fastener'],
+            'recipiente alumínio': ['vasilhame', 'container', 'vessel'],
+            'tanque alumínio': ['reservatório', 'cisterna', 'tank'],
+            'acessório tubo': ['conexão', 'fitting', 'conector'],
+            'soleira': ['peitoril', 'threshold', 'sill'],
+            'alizares': ['batente', 'trim', 'molding'],
+            'caixilho': ['marco', 'frame', 'jamb'],
+            'esquadria': ['caixilharia', 'window frame', 'joinery'],
+            'estrutura metálica': ['construção metálica', 'steel frame', 'metal building'],
+            'obra construção': ['building work', 'construction', 'estrutura'],
+            'material construção': ['building material', 'construção civil', 'obra'],
+            'tela metálica': ['grade metálica', 'wire mesh', 'screen'],
+            'chapa expandida': ['metal expandido', 'expanded metal', 'mesh'],
+            'folha metálica': ['sheet metal', 'lâmina', 'foil']
         }
         
         # Adicionar expansões baseadas no mapeamento
