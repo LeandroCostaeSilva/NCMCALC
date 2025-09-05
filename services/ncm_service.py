@@ -258,7 +258,30 @@ class NCMService:
             'jogo': ['brinquedo', 'game', 'toy', 'diversão'],
             'escova': ['vassoura', 'brush', 'limpeza', 'higiene'],
             'vassoura': ['escova', 'broom', 'limpeza'],
-            'botão': ['button', 'acessório', 'vestuário']
+            'botão': ['button', 'acessório', 'vestuário'],
+            
+            # PRODUTOS QUÍMICOS - SEÇÃO VI
+            'químico': ['chemical', 'produto químico', 'substância'],
+            'hidrogênio': ['gás', 'chemical', 'elemento químico'],
+            'oxigênio': ['gás', 'chemical', 'elemento químico'],
+            'nitrogênio': ['gás', 'chemical', 'elemento químico'],
+            'cloro': ['chemical', 'elemento químico', 'gás'],
+            'carbono': ['chemical', 'elemento químico', 'negro de fumo'],
+            'enxofre': ['chemical', 'elemento químico', 'sulfur'],
+            'benzeno': ['solvente', 'hidrocarboneto', 'chemical'],
+            'tolueno': ['solvente', 'hidrocarboneto', 'chemical'],
+            'xileno': ['solvente', 'hidrocarboneto', 'chemical'],
+            'estireno': ['monômero', 'hidrocarboneto', 'chemical'],
+            'etileno': ['gás', 'hidrocarboneto', 'monômero'],
+            'propeno': ['propileno', 'gás', 'hidrocarboneto'],
+            'medicamento': ['fármaco', 'remédio', 'droga', 'pharmaceutical'],
+            'vacina': ['imunizante', 'biológico', 'medicina'],
+            'perfume': ['fragância', 'essência', 'cosmético'],
+            'óleo essencial': ['essência', 'aroma', 'perfume'],
+            'sabão': ['detergente', 'limpeza', 'higiene'],
+            'detergente': ['sabão', 'limpeza', 'tensoativo'],
+            'corante': ['tinta', 'pigmento', 'dye', 'colorante'],
+            'pigmento': ['corante', 'tinta', 'color', 'colorante']
         }
         
         # Adicionar expansões baseadas no mapeamento

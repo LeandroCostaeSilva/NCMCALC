@@ -417,7 +417,6 @@ def save_scenario(calc_id):
 
 # APIs de apoio
 @app.route('/api/ncm/buscar')
-@login_required
 def api_search_ncm():
     """API para buscar códigos NCM"""
     query = request.args.get('q', '').strip()
