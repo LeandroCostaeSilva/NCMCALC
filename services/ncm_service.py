@@ -364,7 +364,31 @@ class NCMService:
             'bateria automotiva': ['acumulador chumbo', 'arranque', 'carro', 'motor'],
             'power bank': ['bateria portátil', 'acumulador', 'carregador portátil'],
             'carregador': ['fonte alimentação', 'adaptador', 'power supply'],
-            'fonte alimentação': ['carregador', 'power supply', 'adaptador']
+            'fonte alimentação': ['carregador', 'power supply', 'adaptador'],
+            
+            # PEÇAS AUTOMOTIVAS - CAPÍTULO 8708
+            'peça automotiva': ['autopeça', 'auto peça', 'peça carro', 'acessório automotivo'],
+            'autopeça': ['peça automotiva', 'auto peça', 'peça carro'],
+            'para-choque': ['para-choques', 'parachoque', 'bumper'],
+            'freio': ['freios', 'brake', 'pastilha freio', 'disco freio'],
+            'amortecedor': ['amortecedores', 'suspensão', 'shock absorber'],
+            'radiador': ['sistema refrigeração', 'cooling system', 'arrefecimento'],
+            'embreagem': ['clutch', 'disco embreagem', 'platô'],
+            'câmbio': ['transmissão', 'caixa velocidades', 'gearbox'],
+            'diferencial': ['eixo motor', 'transmissão', 'driveshaft'],
+            'volante': ['direção', 'steering wheel', 'caixa direção'],
+            'airbag': ['air bag', 'sistema segurança', 'safety'],
+            'cinto segurança': ['seat belt', 'sistema segurança', 'safety'],
+            'roda': ['rodas', 'wheel', 'aro', 'rim'],
+            'pneu': ['pneus', 'tire', 'tyre', 'borracha'],
+            'câmara ar': ['inner tube', 'pneu', 'borracha'],
+            'escapamento': ['silencioso', 'tubo escape', 'exhaust'],
+            'banco': ['assento', 'seat', 'estofamento'],
+            'carroçaria': ['body', 'lataria', 'funilaria'],
+            'chassi': ['chassis', 'estrutura', 'frame'],
+            'tanque combustível': ['reservatório', 'fuel tank', 'combustível'],
+            'motor': ['engine', 'propulsor', 'motorização'],
+            'bateria automotiva': ['acumulador automotivo', 'bateria carro']
         }
         
         # Adicionar expansões baseadas no mapeamento

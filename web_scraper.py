@@ -647,7 +647,43 @@ class NCMScraper:
             '85075000': {'description': 'Pilhas de lítio', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85076000': {'description': 'Pilhas de ar-zinco', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85078000': {'description': 'Outras pilhas e baterias de pilhas', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85079000': {'description': 'Partes de pilhas e acumuladores elétricos', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '85079000': {'description': 'Partes de pilhas e acumuladores elétricos', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CAPÍTULO 87 - VEÍCULOS AUTOMÓVEIS, TRATORES, CICLOS E OUTROS VEÍCULOS TERRESTRES
+            # POSIÇÃO 8708 - PARTES E ACESSÓRIOS DOS VEÍCULOS AUTOMÓVEIS
+            '87081000': {'description': 'Para-choques e suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87082100': {'description': 'Cintos de segurança', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87082900': {'description': 'Outras partes e acessórios de carroçarias (incluindo cabinas)', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87083000': {'description': 'Freios e servo-freios; suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87084000': {'description': 'Caixas de velocidades e suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87085000': {'description': 'Eixos motores com diferencial, mesmo providos de outros órgãos de transmissão', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87086000': {'description': 'Eixos não motores e suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87087100': {'description': 'Rodas, suas partes e acessórios', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87087900': {'description': 'Outras rodas e suas partes e acessórios', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87088000': {'description': 'Amortecedores de suspensão', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089100': {'description': 'Radiadores', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089200': {'description': 'Silenciadores (silenciosos) e tubos de escape; suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089300': {'description': 'Embreagens e suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089400': {'description': 'Volantes, colunas e caixas de direção', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089500': {'description': 'Airbags com sistema de inflação; suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089910': {'description': 'Chassis com motor', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089920': {'description': 'Carroçarias montadas', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089930': {'description': 'Cabinas montadas', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089991': {'description': 'Tanques de combustível', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089992': {'description': 'Bancos e suas partes', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87089999': {'description': 'Outras partes e acessórios', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # CÓDIGOS ADICIONAIS DE PEÇAS AUTOMOTIVAS ESPECÍFICAS
+            '87071000': {'description': 'Carroçarias dos veículos automóveis da posição 87.03, incluindo as cabinas', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '87079000': {'description': 'Carroçarias dos outros veículos automóveis, incluindo as cabinas', 'ii_rate': 0.18, 'ipi_rate': 0.25, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40111000': {'description': 'Pneus novos de borracha dos tipos utilizados em automóveis de passageiros', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40112000': {'description': 'Pneus novos de borracha dos tipos utilizados em ônibus ou caminhões', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40119000': {'description': 'Outros pneus novos de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40121100': {'description': 'Pneus recauchutados de borracha dos tipos utilizados em automóveis de passageiros', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40121200': {'description': 'Pneus recauchutados de borracha dos tipos utilizados em ônibus ou caminhões', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40129000': {'description': 'Outros pneus recauchutados de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40131000': {'description': 'Câmaras de ar de borracha dos tipos utilizados em automóveis de passageiros, ônibus ou caminhões', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '40139000': {'description': 'Outras câmaras de ar de borracha', 'ii_rate': 0.16, 'ipi_rate': 0.30, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço
