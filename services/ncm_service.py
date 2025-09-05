@@ -238,7 +238,27 @@ class NCMService:
             'torradeira': ['eletrodoméstico', 'toaster', 'pão'],
             'ferro': ['eletrodoméstico', 'iron', 'passar roupa'],
             'aspirador': ['eletrodoméstico', 'vacuum', 'limpeza'],
-            'detergente doméstico': ['produto limpeza', 'sabão', 'dish soap']
+            'detergente doméstico': ['produto limpeza', 'sabão', 'dish soap'],
+            
+            # MÁQUINAS E APARELHOS - SEÇÃO XVI
+            'máquina': ['aparelho', 'equipamento', 'machine', 'motor', 'gerador'],
+            'motor': ['máquina', 'engine', 'motor elétrico', 'propulsão'],
+            'gerador': ['máquina', 'generator', 'energia', 'elétrico'],
+            'turbina': ['máquina', 'turbine', 'vapor', 'energia'],
+            'caldeira': ['máquina', 'vapor', 'boiler', 'aquecimento'],
+            'grupo gerador': ['gerador', 'energia', 'eletrogênio', 'motor'],
+            'eletrogênio': ['gerador', 'energia', 'grupo gerador'],
+            
+            # MÓVEIS E DIVERSOS - SEÇÃO XX
+            'móvel': ['furniture', 'móveis', 'cadeira', 'mesa', 'assento'],
+            'cadeira': ['assento', 'móvel', 'chair', 'furniture'],
+            'assento': ['cadeira', 'móvel', 'seat', 'furniture'],
+            'brinquedo': ['toy', 'jogo', 'boneca', 'criança'],
+            'boneca': ['brinquedo', 'doll', 'toy', 'criança'],
+            'jogo': ['brinquedo', 'game', 'toy', 'diversão'],
+            'escova': ['vassoura', 'brush', 'limpeza', 'higiene'],
+            'vassoura': ['escova', 'broom', 'limpeza'],
+            'botão': ['button', 'acessório', 'vestuário']
         }
         
         # Adicionar expansões baseadas no mapeamento
