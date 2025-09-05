@@ -618,7 +618,36 @@ class NCMScraper:
             '96161000': {'description': 'Vaporizadores de toucador, suas armações e cabeças de armações', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '96162000': {'description': 'Borlas e esponjas para pós ou para cosméticos', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '96170000': {'description': 'Garrafas térmicas e outros recipientes isotérmicos montados', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '96180000': {'description': 'Manequins e artigos semelhantes; autômatos e cenas animadas para vitrines', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '96180000': {'description': 'Manequins e artigos semelhantes; autômatos e cenas animadas para vitrines', 'ii_rate': 0.20, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XVI - MÁQUINAS E APARELHOS; MATERIAL ELÉTRICO
+            # CAPÍTULO 84 - REATORES NUCLEARES, CALDEIRAS, MÁQUINAS E APARELHOS MECÂNICOS
+            '84729021': {'description': 'Máquinas eletrônicas com capacidade de comunicação bidirecional com computadores ou outras máquinas digitais', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84713000': {'description': 'Máquinas automáticas para processamento de dados, portáteis, de peso não superior a 10 kg', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84714100': {'description': 'Outras máquinas automáticas para processamento de dados que contenham, no mesmo corpo, pelo menos uma unidade central de processamento', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84714900': {'description': 'Outras máquinas automáticas para processamento de dados apresentadas sob a forma de sistemas', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84715000': {'description': 'Unidades de processamento, digitais, podendo conter, no mesmo corpo, um ou dois dos seguintes tipos de unidades: unidade de memória, unidade de entrada, unidade de saída', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84716000': {'description': 'Unidades de entrada ou saída, podendo conter, no mesmo corpo, unidades de memória', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84717000': {'description': 'Unidades de memória', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84718000': {'description': 'Outras unidades de máquinas automáticas para processamento de dados', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84719000': {'description': 'Outras máquinas automáticas para processamento de dados e suas unidades; leitores magnéticos ou ópticos', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CAPÍTULO 85 - MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS
+            # POSIÇÃO 8506 - ACUMULADORES ELÉTRICOS E PILHAS
+            '85061000': {'description': 'Acumuladores de chumbo, dos tipos utilizados para o arranque dos motores de pistão', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85068000': {'description': 'Outros acumuladores de chumbo', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85065000': {'description': 'Acumuladores de níquel-cádmio', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85066000': {'description': 'Acumuladores de níquel-hidreto metálico', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85067000': {'description': 'Acumuladores de lítio', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85069000': {'description': 'Outros acumuladores', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85071000': {'description': 'Pilhas de dióxido de manganês', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85072000': {'description': 'Outras pilhas de zinco-carbono', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85073000': {'description': 'Pilhas de óxido de mercúrio', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85074000': {'description': 'Pilhas de óxido de prata', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85075000': {'description': 'Pilhas de lítio', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85076000': {'description': 'Pilhas de ar-zinco', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85078000': {'description': 'Outras pilhas e baterias de pilhas', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85079000': {'description': 'Partes de pilhas e acumuladores elétricos', 'ii_rate': 0.18, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço

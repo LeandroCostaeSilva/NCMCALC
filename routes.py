@@ -425,10 +425,10 @@ def api_search_ncm():
             return jsonify([])
         
         results = ncm_service.search_ncm(query)
-        return jsonify(results)
+        return jsonify(results if results else [])
     except Exception as e:
         logging.error(f"Erro na busca NCM: {str(e)}")
-        return jsonify({"error": "Erro interno na busca de códigos NCM"}), 500
+        return jsonify([])  # Retorna lista vazia ao invés de erro
 
 @app.route('/api/ncm/<ncm_code>')
 @login_required

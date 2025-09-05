@@ -343,7 +343,28 @@ class NCMService:
             'resina epóxi': ['epoxy', 'adesivo estrutural'],
             'acrílico': ['PMMA', 'metacrilato', 'transparente'],
             'isopor': ['poliestireno expandido', 'EPS'],
-            'teflon': ['PTFE', 'politetrafluoroetileno']
+            'teflon': ['PTFE', 'politetrafluoroetileno'],
+            
+            # MÁQUINAS ELETRÔNICAS E COMPUTADORES - CAPÍTULO 84/85
+            'máquina eletrônica': ['computador', 'processador', 'digital', 'comunicação bidirecional'],
+            'comunicação bidirecional': ['máquina eletrônica', 'digital', 'computador', 'rede'],
+            'computador digital': ['máquina eletrônica', 'processador', 'CPU', 'digital'],
+            'processamento dados': ['computador', 'máquina eletrônica', 'CPU', 'digital'],
+            'unidade processamento': ['CPU', 'processador', 'computador', 'digital'],
+            'memória': ['RAM', 'storage', 'armazenamento', 'computador'],
+            'entrada saída': ['input', 'output', 'I/O', 'interface', 'computador'],
+            
+            # ACUMULADORES E PILHAS - CAPÍTULO 8506
+            'bateria': ['acumulador', 'pilha', 'battery', 'energia', 'elétrica'],
+            'acumulador': ['bateria', 'pilha', 'battery', 'armazenamento energia'],
+            'pilha': ['bateria', 'acumulador', 'battery', 'energia'],
+            'bateria chumbo': ['acumulador chumbo', 'automotiva', 'arranque'],
+            'bateria lítio': ['acumulador lítio', 'lithium', 'ion', 'recarregável'],
+            'bateria níquel': ['acumulador níquel', 'NiCad', 'NiMH', 'recarregável'],
+            'bateria automotiva': ['acumulador chumbo', 'arranque', 'carro', 'motor'],
+            'power bank': ['bateria portátil', 'acumulador', 'carregador portátil'],
+            'carregador': ['fonte alimentação', 'adaptador', 'power supply'],
+            'fonte alimentação': ['carregador', 'power supply', 'adaptador']
         }
         
         # Adicionar expansões baseadas no mapeamento
