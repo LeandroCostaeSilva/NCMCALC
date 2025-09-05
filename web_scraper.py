@@ -724,7 +724,60 @@ class NCMScraper:
             '76152000': {'description': 'Chapas e tiras, expandidas, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '76161000': {'description': 'Tachas, pregos, parafusos, porcas, ganchos roscados, rebites, chavetas, contrapinos, arruelas e artigos semelhantes, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '76169100': {'description': 'Telas metálicas, grades e redes, de fios de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '76169900': {'description': 'Outras obras de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '76169900': {'description': 'Outras obras de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XVI - MÁQUINAS E APARELHOS, MATERIAL ELÉTRICO E SUAS PARTES
+            # CAPÍTULO 84 - REATORES NUCLEARES, CALDEIRAS, MÁQUINAS E APARELHOS MECÂNICOS
+            # POSIÇÃO 8481 - TORNEIRAS, VÁLVULAS E DISPOSITIVOS SEMELHANTES
+            '84811000': {'description': 'Válvulas redutoras de pressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84812000': {'description': 'Válvulas para transmissões oleohidráulicas ou pneumáticas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84813000': {'description': 'Válvulas de retenção', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84814000': {'description': 'Válvulas de segurança ou de alívio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818010': {'description': 'Válvulas de admissão ou de escape dos motores de ignição por centelha ou por compressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818090': {'description': 'Outras torneiras, válvulas e dispositivos semelhantes', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819000': {'description': 'Partes de torneiras, válvulas e dispositivos semelhantes', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # CÓDIGOS ESPECÍFICOS DE VÁLVULAS E TORNEIRAS POR APLICAÇÃO
+            '84811010': {'description': 'Válvulas redutoras de pressão para água', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84811090': {'description': 'Outras válvulas redutoras de pressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84812010': {'description': 'Válvulas direcionais para sistemas hidráulicos', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84812020': {'description': 'Válvulas de controle de fluxo hidráulico', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84812030': {'description': 'Válvulas pneumáticas para ar comprimido', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84812090': {'description': 'Outras válvulas para transmissões oleohidráulicas ou pneumáticas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84813010': {'description': 'Válvulas de retenção (check valve)', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84813020': {'description': 'Válvulas anti-retorno', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84813090': {'description': 'Outras válvulas de retenção', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84814010': {'description': 'Válvulas de alívio de pressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84814020': {'description': 'Válvulas de segurança para caldeiras', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84814030': {'description': 'Válvulas de escape', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84814090': {'description': 'Outras válvulas de segurança ou de alívio', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818011': {'description': 'Torneiras e válvulas de esfera (ball valve)', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818012': {'description': 'Válvulas de gaveta (gate valve)', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818013': {'description': 'Válvulas globo', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818014': {'description': 'Válvulas borboleta (butterfly valve)', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818015': {'description': 'Válvulas de diafragma', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818016': {'description': 'Registros de pressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818019': {'description': 'Outras válvulas de admissão ou escape', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818091': {'description': 'Torneiras para uso doméstico', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818092': {'description': 'Válvulas solenóide', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818093': {'description': 'Válvulas termostáticas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818094': {'description': 'Válvulas de purga (bleed valve)', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818095': {'description': 'Válvulas de isolamento', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818096': {'description': 'Válvulas de controle automático', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818097': {'description': 'Válvulas de três vias', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818098': {'description': 'Válvulas misturadoras', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84818099': {'description': 'Outras torneiras, válvulas e dispositivos não especificados', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            
+            # PARTES E COMPONENTES DE VÁLVULAS
+            '84819010': {'description': 'Partes de válvulas redutoras de pressão', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819020': {'description': 'Partes de válvulas hidráulicas e pneumáticas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819030': {'description': 'Partes de válvulas de retenção', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819040': {'description': 'Partes de válvulas de segurança', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819050': {'description': 'Atuadores para válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819060': {'description': 'Volantes para válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819070': {'description': 'Sedes e obturadores de válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819080': {'description': 'Hastes e castelos de válvulas', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '84819090': {'description': 'Outras partes de torneiras, válvulas e dispositivos', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço

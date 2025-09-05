@@ -414,7 +414,39 @@ class NCMService:
             'material construção': ['building material', 'construção civil', 'obra'],
             'tela metálica': ['grade metálica', 'wire mesh', 'screen'],
             'chapa expandida': ['metal expandido', 'expanded metal', 'mesh'],
-            'folha metálica': ['sheet metal', 'lâmina', 'foil']
+            'folha metálica': ['sheet metal', 'lâmina', 'foil'],
+            
+            # VÁLVULAS E EQUIPAMENTOS HIDRÁULICOS - CAPÍTULO 8481
+            'válvula': ['valve', 'registro', 'dispositivo controle'],
+            'torneira': ['tap', 'faucet', 'spigot', 'válvula'],
+            'válvula esfera': ['ball valve', 'válvula bola', 'esférica'],
+            'válvula gaveta': ['gate valve', 'válvula guilhotina', 'gaveta'],
+            'válvula borboleta': ['butterfly valve', 'válvula disco', 'borboleta'],
+            'válvula globo': ['globe valve', 'válvula angular', 'globo'],
+            'válvula retenção': ['check valve', 'anti-retorno', 'válvula unidirecional'],
+            'válvula segurança': ['safety valve', 'válvula alívio', 'escape'],
+            'válvula pressão': ['pressure valve', 'redutora pressão', 'reguladora'],
+            'válvula solenóide': ['solenoid valve', 'eletroválvula', 'válvula elétrica'],
+            'válvula diafragma': ['diaphragm valve', 'membrana', 'válvula flexível'],
+            'válvula pneumática': ['pneumatic valve', 'ar comprimido', 'pneumático'],
+            'válvula hidráulica': ['hydraulic valve', 'oleohidráulica', 'hidráulico'],
+            'válvula termostática': ['thermostatic valve', 'válvula térmica', 'temperatura'],
+            'válvula misturadora': ['mixing valve', 'misturador', 'válvula três vias'],
+            'válvula isolamento': ['isolation valve', 'bloqueio', 'fechamento'],
+            'válvula controle': ['control valve', 'moduladora', 'automática'],
+            'válvula purga': ['bleed valve', 'dreno', 'sangria'],
+            'registro pressão': ['pressure gauge', 'manômetro', 'medição'],
+            'atuador válvula': ['valve actuator', 'acionador', 'motor válvula'],
+            'volante válvula': ['handwheel', 'manivela', 'acionamento manual'],
+            'sede válvula': ['valve seat', 'assento', 'vedação'],
+            'obturador': ['plug', 'disco válvula', 'elemento vedação'],
+            'haste válvula': ['valve stem', 'eixo', 'vara'],
+            'castelo válvula': ['valve bonnet', 'tampa', 'cabeçote'],
+            'sistema hidráulico': ['hydraulic system', 'oleohidráulico', 'pressão'],
+            'sistema pneumático': ['pneumatic system', 'ar comprimido', 'pressão ar'],
+            'equipamento hidráulico': ['hydraulic equipment', 'maquinário hidráulico', 'sistema pressão'],
+            'controle fluxo': ['flow control', 'regulagem vazão', 'modulação'],
+            'redução pressão': ['pressure reduction', 'regulagem pressão', 'controle pressão']
         }
         
         # Adicionar expansões baseadas no mapeamento
