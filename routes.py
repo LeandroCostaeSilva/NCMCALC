@@ -232,6 +232,8 @@ def calculate():
                 ('INSURANCE', cost_form.insurance_usd.data, cost_form.insurance_usd.data * exchange_rate if cost_form.insurance_usd.data else 0, 'Seguro'),
                 ('CLEARANCE_FEES', None, cost_form.clearance_fees_brl.data or 0, 'Taxas de Desembaraço'),
                 ('BROKER_FEES', None, cost_form.broker_fees_brl.data or 0, 'Honorários Despachante'),
+                ('STORAGE_COST', None, cost_form.storage_cost_brl.data or 0, 'Custo de Armazenagem'),
+                ('MARKETING_COST', None, cost_form.marketing_cost_brl.data or 0, 'Custo de Marketing'),
                 ('OTHER_COSTS', None, cost_form.other_costs_brl.data or 0, 'Outros Custos')
             ]
             

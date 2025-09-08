@@ -158,6 +158,28 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
+                        <label for="{{ cost_form.storage_cost_brl.id }}" class="form-label">
+                            {{ cost_form.storage_cost_brl.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            {{ cost_form.storage_cost_brl() }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="{{ cost_form.marketing_cost_brl.id }}" class="form-label">
+                            {{ cost_form.marketing_cost_brl.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            {{ cost_form.marketing_cost_brl() }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
                         <label for="{{ cost_form.other_costs_brl.id }}" class="form-label">
                             {{ cost_form.other_costs_brl.label.text }}
                         </label>

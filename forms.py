@@ -52,18 +52,16 @@ class CostForm(FlaskForm):
                                    widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
     broker_fees_brl = FloatField('Honorários Despachante (BRL)', validators=[Optional(), NumberRange(min=0)], 
                                 widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
+    storage_cost_brl = FloatField('Custo de Armazenagem (BRL)', validators=[Optional(), NumberRange(min=0)], 
+                                 widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
+    marketing_cost_brl = FloatField('Custo de Marketing (BRL)', validators=[Optional(), NumberRange(min=0)], 
+                                   widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
     other_costs_brl = FloatField('Outros Custos (BRL)', validators=[Optional(), NumberRange(min=0)], 
                                 widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
 
 class ProfitabilityForm(FlaskForm):
     selling_price_brl = FloatField('Preço de Venda Desejado (BRL)', validators=[DataRequired(), NumberRange(min=0.01)], 
                                   widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control'})
-    storage_cost_brl = FloatField('Custo de Armazenagem (BRL)', validators=[Optional(), NumberRange(min=0)], 
-                                 widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
-    marketing_cost_brl = FloatField('Custo de Marketing (BRL)', validators=[Optional(), NumberRange(min=0)], 
-                                   widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
-    platform_fees_rate = FloatField('Taxa de Marketplace (%)', validators=[Optional(), NumberRange(min=0, max=100)], 
-                                    widget=NumberInput(step=0.01), render_kw={'placeholder': '0.00', 'class': 'form-control', 'value': '0'})
     submit = SubmitField('Calcular Rentabilidade', render_kw={'class': 'btn btn-success'})
 
 class ScenarioForm(FlaskForm):
