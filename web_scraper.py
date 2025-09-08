@@ -953,7 +953,111 @@ class NCMScraper:
             '85179020': {'description': 'Baterias para equipamentos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85179030': {'description': 'Carregadores para dispositivos de comunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85179040': {'description': 'Cabos e conectores para telecomunicações', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85179090': {'description': 'Outras partes para equipamentos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '85179090': {'description': 'Outras partes para equipamentos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XVI - MÁQUINAS E APARELHOS, MATERIAL ELÉTRICO E SUAS PARTES
+            # CAPÍTULO 85 - MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS E SUAS PARTES
+            # POSIÇÃO 8536 - APARELHOS PARA INTERRUPÇÃO, SECCIONAMENTO, PROTEÇÃO, DERIVAÇÃO, LIGAÇÃO OU CONEXÃO DE CIRCUITOS ELÉTRICOS
+
+            # SUBPOSIÇÃO 853610 - PORTA-FUSÍVEIS, CORTACIRCUITOS E SECCIONADORES
+            '85361000': {'description': 'Porta-fusíveis, cortacircuitos e seccionadores', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85361010': {'description': 'Porta-fusíveis para baixa tensão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85361020': {'description': 'Cortacircuitos e seccionadores', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85361090': {'description': 'Outros porta-fusíveis e seccionadores', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853620 - DISJUNTORES
+            '85362000': {'description': 'Disjuntores para tensão não superior a 1.000 V', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362010': {'description': 'Disjuntores monopolares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362020': {'description': 'Disjuntores bipolares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362030': {'description': 'Disjuntores tripolares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362040': {'description': 'Disjuntores termomagnéticos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362050': {'description': 'Disjuntores diferenciais (DR)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85362090': {'description': 'Outros disjuntores para baixa tensão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853630 - OUTROS APARELHOS DE PROTEÇÃO
+            '85363000': {'description': 'Outros aparelhos para proteção de circuitos elétricos, para tensão não superior a 1.000 V', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85363010': {'description': 'Dispositivos de proteção contra surtos (DPS)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85363020': {'description': 'Relés de proteção', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85363030': {'description': 'Fusíveis elétricos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85363090': {'description': 'Outros aparelhos de proteção elétrica', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853641 - RELÉS
+            '85364100': {'description': 'Relés para tensão não superior a 60 V', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364110': {'description': 'Relés eletromagnéticos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364120': {'description': 'Relés de estado sólido', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364130': {'description': 'Relés temporizadores', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364190': {'description': 'Outros relés para baixa tensão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853649 - OUTROS RELÉS
+            '85364900': {'description': 'Outros relés para tensão superior a 60 V', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364910': {'description': 'Relés de potência', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364920': {'description': 'Relés industriais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85364990': {'description': 'Outros relés para alta tensão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853650 - OUTROS INTERRUPTORES
+            '85365000': {'description': 'Outros interruptores, seccionadores e comutadores, para tensão não superior a 1.000 V', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365010': {'description': 'Interruptores simples', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365020': {'description': 'Interruptores paralelos (three way)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365030': {'description': 'Comutadores rotativos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365040': {'description': 'Chaves seccionadoras', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365050': {'description': 'Micro switches', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85365090': {'description': 'Outros interruptores e comutadores', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853661 - SUPORTES PARA LÂMPADAS
+            '85366100': {'description': 'Suportes para lâmpadas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366110': {'description': 'Soquetes para lâmpadas incandescentes', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366120': {'description': 'Soquetes para lâmpadas fluorescentes', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366130': {'description': 'Soquetes para lâmpadas LED', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366190': {'description': 'Outros suportes para lâmpadas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 853669 - OUTROS APARELHOS DE CONEXÃO (CONECTORES) - FOCO PRINCIPAL
+            '85366900': {'description': 'Outros aparelhos para interrupção, seccionamento, proteção, derivação, ligação ou conexão de circuitos elétricos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366910': {'description': 'Conectores para cabos planos constituídos por condutores paralelos isolados individualmente', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366920': {'description': 'Conectores USB', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366930': {'description': 'Conectores HDMI', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366940': {'description': 'Conectores RJ45 (Ethernet)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366950': {'description': 'Conectores de força (plugs e tomadas)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366960': {'description': 'Conectores BNC', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366970': {'description': 'Conectores DB (D-Sub)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366980': {'description': 'Conectores circulares (militares/industriais)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366990': {'description': 'Outros conectores e aparelhos de conexão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CONECTORES ESPECÍFICOS DETALHADOS
+            '85366921': {'description': 'Conectores USB Tipo A', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366922': {'description': 'Conectores USB Tipo B', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366923': {'description': 'Conectores USB Tipo C', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366924': {'description': 'Conectores Micro USB', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366925': {'description': 'Conectores Mini USB', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366931': {'description': 'Conectores HDMI Padrão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366932': {'description': 'Conectores Mini HDMI', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366933': {'description': 'Conectores Micro HDMI', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366941': {'description': 'Plugs RJ45 8P8C', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366942': {'description': 'Jacks RJ45 fêmea', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366943': {'description': 'Conectores RJ11/RJ12', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366951': {'description': 'Plugs macho para tomadas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366952': {'description': 'Tomadas elétricas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366953': {'description': 'Adaptadores de plugs', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366971': {'description': 'Conectores DB9', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366972': {'description': 'Conectores DB15', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366973': {'description': 'Conectores DB25', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366974': {'description': 'Conectores VGA (DE15)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CONECTORES INDUSTRIAIS E ESPECIAIS
+            '85366981': {'description': 'Conectores M12', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366982': {'description': 'Conectores M8', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366983': {'description': 'Conectores militares MIL-DTL', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366984': {'description': 'Conectores push-pull', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366985': {'description': 'Conectores à prova de água IP67/IP68', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # OUTROS CONECTORES E TERMINAIS
+            '85366991': {'description': 'Terminais de ligação (borne)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366992': {'description': 'Blocos de terminais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366993': {'description': 'Conectores tipo banana', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366994': {'description': 'Conectores tipo jacaré', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366995': {'description': 'Conectores de bateria', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366996': {'description': 'Conectores de áudio (P2, P10)', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366997': {'description': 'Conectores coaxiais', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85366998': {'description': 'Conectores de fibra óptica', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço
