@@ -256,8 +256,14 @@
 // Calculate total additional costs
 let totalAdditionalCosts = 0;
 {% for cost in costs %}
-totalAdditionalCosts += {{ cost.amount_brl }};
+totalAdditionalCosts += {{ cost.amount_brl or 0 }};
 {% endfor %}
+
+// Initialize values for the chart
+const cifValue = {{ calculation.total_cost_brl or 0 }};
+const taxesValue = {{ calculation.total_taxes_brl or 0 }};
+const additionalCostsValue = totalAdditionalCosts;
+const totalCostValue = cifValue + taxesValue + additionalCostsValue;
 
 // Cost comparison chart
 const ctx = document.getElementById('costComparisonChart').getContext('2d');
@@ -267,24 +273,20 @@ const costComparisonChart = new Chart(ctx, {
         labels: ['Custo Total', 'Preço de Venda*'],
         datasets: [{
             label: 'Valor CIF',
-            data: [{{ calculation.total_cost_brl }}, 0],
-            backgroundColor: '#36A2EB',
-            stack: 'cost'
+            data: [cifValue, 0],
+            backgroundColor: '#36A2EB'
         }, {
             label: 'Impostos',
-            data: [{{ calculation.total_taxes_brl }}, 0],
-            backgroundColor: '#FF6384',
-            stack: 'cost'
+            data: [taxesValue, 0],
+            backgroundColor: '#FF6384'
         }, {
             label: 'Custos Adicionais',
-            data: [totalAdditionalCosts, 0],
-            backgroundColor: '#FFCE56',
-            stack: 'cost'
+            data: [additionalCostsValue, 0],
+            backgroundColor: '#FFCE56'
         }, {
-            label: 'Preço de Venda',
-            data: [0, 0], // Will be updated dynamically
-            backgroundColor: '#4BC0C0',
-            stack: 'price'
+            label: 'Receita',
+            data: [0, 0], // Will be updated with selling price
+            backgroundColor: '#4BC0C0'
         }]
     },
     options: {
@@ -296,9 +298,13 @@ const costComparisonChart = new Chart(ctx, {
             },
             y: {
                 stacked: true,
+                beginAtZero: true,
                 ticks: {
                     callback: function(value) {
-                        return 'R$ ' + value.toLocaleString('pt-BR', {minimumFractionDigits: 0});
+                        return 'R$ ' + value.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
                     }
                 }
             }
@@ -310,7 +316,10 @@ const costComparisonChart = new Chart(ctx, {
             tooltip: {
                 callbacks: {
                     label: function(context) {
-                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
                     }
                 }
             }
@@ -320,22 +329,35 @@ const costComparisonChart = new Chart(ctx, {
 
 // Function to update chart with selling price
 function updateCostComparisonChart(sellingPrice) {
+    // Update the chart data
     costComparisonChart.data.datasets[3].data[1] = sellingPrice;
     costComparisonChart.data.labels[1] = 'Preço de Venda';
     costComparisonChart.update();
     
     // Calculate and display profit
-    const totalCost = {{ calculation.total_cost_brl }} + {{ calculation.total_taxes_brl }} + totalAdditionalCosts;
-    const profit = sellingPrice - totalCost;
-    const profitMargin = (profit / sellingPrice) * 100;
+    const profit = sellingPrice - totalCostValue;
+    const profitMargin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
     
     // Update profit display
-    document.getElementById('profit-display').innerHTML = `
-        <div class="alert alert-${profit > 0 ? 'success' : 'danger'}" role="alert">
-            <strong>Lucro Líquido:</strong> R$ ${profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})} 
-            (${profitMargin.toFixed(1)}% de margem)
-        </div>
-    `;
+    const profitDisplay = document.getElementById('profit-display');
+    if (profitDisplay) {
+        profitDisplay.innerHTML = `
+            <div class="alert alert-${profit > 0 ? 'success' : 'danger'}" role="alert">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Lucro Líquido:</strong><br>
+                        R$ ${profit.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Margem de Lucro:</strong><br>
+                        ${profitMargin.toFixed(1)}%
+                    </div>
+                </div>
+                <hr class="my-2">
+                <small><strong>Custo Total:</strong> R$ ${totalCostValue.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</small>
+            </div>
+        `;
+    }
 }
 
 // Update chart when selling price changes
