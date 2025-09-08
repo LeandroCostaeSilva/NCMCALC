@@ -829,7 +829,67 @@ class NCMScraper:
             '82014090': {'description': 'Outras ferramentas de corte para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '82015010': {'description': 'Tesouras de jardinagem pequenas', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '82015020': {'description': 'Alicates de jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '82015090': {'description': 'Outras tesouras manuais para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '82015090': {'description': 'Outras tesouras manuais para jardinagem', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XVI - MÁQUINAS E APARELHOS, MATERIAL ELÉTRICO E SUAS PARTES
+            # CAPÍTULO 85 - MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS E SUAS PARTES
+            
+            # POSIÇÃO 8501 - MOTORES E GERADORES ELÉTRICOS
+            '85017100': {'description': 'Geradores de corrente contínua de potência não superior a 750 W', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017200': {'description': 'Geradores de corrente contínua de potência superior a 750 W, mas não superior a 75 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017300': {'description': 'Geradores de corrente contínua de potência superior a 75 kW, mas não superior a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017400': {'description': 'Geradores de corrente contínua de potência superior a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CÓDIGOS ESPECÍFICOS PARA GERADORES SOLARES
+            '85017110': {'description': 'Geradores solares de corrente contínua de potência não superior a 750 W', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017120': {'description': 'Microgeradores solares fotovoltaicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017190': {'description': 'Outros geradores de corrente contínua de potência não superior a 750 W', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017210': {'description': 'Geradores solares de corrente contínua de 750 W a 75 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017220': {'description': 'Minigeradores solares fotovoltaicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017290': {'description': 'Outros geradores de corrente contínua de 750 W a 75 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017310': {'description': 'Geradores solares de corrente contínua de 75 kW a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017390': {'description': 'Outros geradores de corrente contínua de 75 kW a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017410': {'description': 'Geradores solares de corrente contínua superiores a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85017490': {'description': 'Outros geradores de corrente contínua superiores a 375 kW', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # POSIÇÃO 8541 - DIODOS, TRANSISTORES E DISPOSITIVOS SEMICONDUTORES SEMELHANTES
+            '85414200': {'description': 'Células fotovoltaicas, mesmo montadas em módulos ou painéis', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414300': {'description': 'Células fotovoltaicas montadas em módulos ou painéis', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CÓDIGOS ESPECÍFICOS DE CÉLULAS E MÓDULOS SOLARES
+            '85414210': {'description': 'Células fotovoltaicas de silício monocristalino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414220': {'description': 'Células fotovoltaicas de silício policristalino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414230': {'description': 'Células fotovoltaicas de silício amorfo', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414240': {'description': 'Células fotovoltaicas de filme fino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414290': {'description': 'Outras células fotovoltaicas', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414310': {'description': 'Módulos fotovoltaicos de silício monocristalino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414320': {'description': 'Módulos fotovoltaicos de silício policristalino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414330': {'description': 'Painéis solares fotovoltaicos', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414340': {'description': 'Módulos solares de filme fino', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414350': {'description': 'Módulos fotovoltaicos bifaciais', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85414390': {'description': 'Outros módulos e painéis fotovoltaicos', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # EQUIPAMENTOS COMPLEMENTARES DE ENERGIA SOLAR
+            '85044000': {'description': 'Conversores estáticos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044010': {'description': 'Inversores para sistemas fotovoltaicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044020': {'description': 'Controladores de carga solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044030': {'description': 'Microinversores solares', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044040': {'description': 'Otimizadores de potência solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044090': {'description': 'Outros conversores para energia solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # ESTRUTURAS E ACESSÓRIOS PARA SISTEMAS SOLARES
+            '76169910': {'description': 'Estruturas de fixação para painéis solares, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '73089000': {'description': 'Outras construções e suas partes, de ferro fundido, ferro ou aço', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '73089010': {'description': 'Estruturas de fixação para painéis solares, de aço', 'ii_rate': 0.14, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CABOS E CONECTORES PARA SISTEMAS SOLARES
+            '85444200': {'description': 'Outros condutores elétricos, para tensão não superior a 1.000 V, munidos de peças de conexão', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85444210': {'description': 'Cabos solares DC com conectores MC4', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85444290': {'description': 'Outros cabos para sistemas fotovoltaicos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85369000': {'description': 'Outros aparelhos para proteção de circuitos elétricos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85369010': {'description': 'String box para sistemas solares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85369020': {'description': 'Fusíveis para sistemas fotovoltaicos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85369030': {'description': 'Disjuntores para sistemas solares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço
