@@ -360,7 +360,10 @@ function updateProfitDisplay(unitPrice, totalRevenue) {
                         <div class="col-md-3 col-sm-6">
                             <div class="card h-100 bg-light border">
                                 <div class="card-body text-center d-flex flex-column justify-content-center">
-                                    <h6 class="card-title mb-2 text-muted">Preço Unitário</h6>
+                                    <div class="mb-2">
+                                        <span class="badge bg-primary">PV</span>
+                                        <h6 class="card-title mt-1 mb-2 text-muted">Preço de Venda</h6>
+                                    </div>
                                     <h4 class="text-primary mb-1">R$ ${unitPrice.toFixed(2).replace('.', ',')}</h4>
                                     <small class="text-muted">por unidade</small>
                                 </div>
@@ -369,7 +372,10 @@ function updateProfitDisplay(unitPrice, totalRevenue) {
                         <div class="col-md-3 col-sm-6">
                             <div class="card h-100 bg-light border">
                                 <div class="card-body text-center d-flex flex-column justify-content-center">
-                                    <h6 class="card-title mb-2 text-muted">Faturamento Total</h6>
+                                    <div class="mb-2">
+                                        <span class="badge bg-info">FT</span>
+                                        <h6 class="card-title mt-1 mb-2 text-muted">Faturamento Total</h6>
+                                    </div>
                                     <h4 class="text-info mb-1">R$ ${totalRevenue.toFixed(2).replace('.', ',')}</h4>
                                     <small class="text-muted">${costData.quantity} unidades</small>
                                 </div>
@@ -378,7 +384,10 @@ function updateProfitDisplay(unitPrice, totalRevenue) {
                         <div class="col-md-3 col-sm-6">
                             <div class="card h-100 bg-light border">
                                 <div class="card-body text-center d-flex flex-column justify-content-center">
-                                    <h6 class="card-title mb-2 text-muted">${profitText} Líquido</h6>
+                                    <div class="mb-2">
+                                        <span class="badge bg-${alertType}">${netProfit >= 0 ? 'LL' : 'PJ'}</span>
+                                        <h6 class="card-title mt-1 mb-2 text-muted">${profitText} Líquido</h6>
+                                    </div>
                                     <h4 class="text-${alertType} mb-1">R$ ${Math.abs(netProfit).toFixed(2).replace('.', ',')}</h4>
                                     <small class="text-muted">${netProfit >= 0 ? 'Positivo' : 'Negativo'}</small>
                                 </div>
@@ -387,9 +396,12 @@ function updateProfitDisplay(unitPrice, totalRevenue) {
                         <div class="col-md-3 col-sm-6">
                             <div class="card h-100 bg-light border">
                                 <div class="card-body text-center d-flex flex-column justify-content-center">
-                                    <h6 class="card-title mb-2 text-muted">Margem sobre Compra</h6>
+                                    <div class="mb-2">
+                                        <span class="badge bg-${alertType}">ROI</span>
+                                        <h6 class="card-title mt-1 mb-2 text-muted">Retorno sobre Investimento</h6>
+                                    </div>
                                     <h4 class="text-${alertType} mb-1">${profitMarginOnCost.toFixed(1)}%</h4>
-                                    <small class="text-muted">ROI</small>
+                                    <small class="text-muted">Margem sobre Compra</small>
                                 </div>
                             </div>
                         </div>
@@ -398,18 +410,27 @@ function updateProfitDisplay(unitPrice, totalRevenue) {
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="text-center p-3 border rounded bg-white">
+                                <div class="mb-2">
+                                    <span class="badge bg-danger">CPU</span>
+                                </div>
                                 <strong class="d-block text-muted mb-1">Custo por Unidade</strong>
                                 <span class="h6 text-danger">R$ ${(costData.total / costData.quantity).toFixed(2).replace('.', ',')}</span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-center p-3 border rounded bg-white">
+                                <div class="mb-2">
+                                    <span class="badge bg-${alertType}">MSV</span>
+                                </div>
                                 <strong class="d-block text-muted mb-1">Margem sobre Venda</strong>
                                 <span class="h6 text-${alertType}">${profitMarginOnRevenue.toFixed(1)}%</span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-center p-3 border rounded bg-white">
+                                <div class="mb-2">
+                                    <span class="badge bg-info">MKP</span>
+                                </div>
                                 <strong class="d-block text-muted mb-1">Markup</strong>
                                 <span class="h6 text-info">${(totalRevenue / costData.total).toFixed(2)}x</span>
                             </div>
