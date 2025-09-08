@@ -634,7 +634,28 @@ class NCMService:
             'seccionador': ['disconnector', 'isolator', 'sectionalizer'],
             'dispositivo proteção surto': ['surge protection device', 'SPD', 'DPS'],
             'fusível elétrico': ['electrical fuse', 'fuse', 'proteção sobrecarga'],
-            'aparelho proteção': ['protection device', 'safety device', 'circuit protection']
+            'aparelho proteção': ['protection device', 'safety device', 'circuit protection'],
+
+            # CONVERSORES ESTÁTICOS - POSIÇÃO 8504 (CONFORME SISCOMEX)
+            'carregador acumulador': ['carregador bateria', 'battery charger', 'charger'],
+            'carregador bateria': ['carregador acumulador', 'charger', 'fonte carregamento'],
+            'carregador': ['charger', 'fonte alimentação', 'adaptador energia'],
+            'ups': ['no-break', 'fonte ininterrupta', 'uninterruptible power supply'],
+            'no-break': ['UPS', 'fonte ininterrupta', 'backup power'],
+            'alimentação ininterrupta': ['UPS', 'no-break', 'backup energia'],
+            'conversor estático': ['static converter', 'power converter', 'electronic converter'],
+            'inversor frequência': ['frequency inverter', 'drive', 'variador frequência'],
+            'drive': ['inversor frequência', 'frequency drive', 'motor drive'],
+            'variador frequência': ['frequency inverter', 'VFD', 'drive'],
+            'conversor dc dc': ['DC-DC converter', 'conversor tensão', 'step up down'],
+            'conversor ac dc': ['AC-DC converter', 'retificador', 'rectifier'],
+            'retificador': ['rectifier', 'conversor AC-DC', 'fonte retificada'],
+            'inversor solar': ['solar inverter', 'inversor fotovoltaico', 'grid tie inverter'],
+            'controlador carga': ['charge controller', 'regulador carga', 'MPPT controller'],
+            'fonte alimentação': ['power supply', 'fonte energia', 'adaptador'],
+            'adaptador energia': ['power adapter', 'fonte externa', 'carregador parede'],
+            'conversor energia': ['power converter', 'conversor elétrico', 'transformador eletrônico'],
+            'equipamento energia': ['power equipment', 'dispositivo energia', 'aparelho elétrico']
         }
         
         # Adicionar expansões baseadas no mapeamento
