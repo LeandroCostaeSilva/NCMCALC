@@ -96,9 +96,11 @@
                         </table>
                     </div>
                     
-                    <!-- Tax Chart -->
+                    <!-- Cost Comparison Chart -->
                     <div class="text-center mt-4">
-                        <canvas id="taxChart" width="300" height="300"></canvas>
+                        <canvas id="costComparisonChart" width="400" height="200"></canvas>
+                        <div id="profit-display" class="mt-3"></div>
+                        <small class="text-muted">* Informe um preço de venda na análise de rentabilidade para visualizar a comparação</small>
                     </div>
                 </div>
             </div>
@@ -111,38 +113,13 @@
                 <div class="card-body">
                     <form id="profitability-form">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 {{ profitability_form.selling_price_brl.label(class="form-label") }}
                                 <div class="input-group">
                                     <span class="input-group-text">R$</span>
                                     {{ profitability_form.selling_price_brl() }}
                                 </div>
-                            </div>
-                            
-                            <div class="col-md-6 mb-3">
-                                {{ profitability_form.platform_fees_rate.label(class="form-label") }}
-                                <div class="input-group">
-                                    {{ profitability_form.platform_fees_rate() }}
-                                    <span class="input-group-text">%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                {{ profitability_form.storage_cost_brl.label(class="form-label") }}
-                                <div class="input-group">
-                                    <span class="input-group-text">R$</span>
-                                    {{ profitability_form.storage_cost_brl() }}
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                {{ profitability_form.marketing_cost_brl.label(class="form-label") }}
-                                <div class="input-group">
-                                    <span class="input-group-text">R$</span>
-                                    {{ profitability_form.marketing_cost_brl() }}
-                                </div>
+                                <div class="form-text">Informe o preço de venda desejado para análise de rentabilidade</div>
                             </div>
                         </div>
 
@@ -275,30 +252,96 @@
 
 {% block scripts %}
 <script>
-// Tax breakdown chart
-const ctx = document.getElementById('taxChart').getContext('2d');
-const taxChart = new Chart(ctx, {
-    type: 'doughnut',
+// Calculate total additional costs
+let totalAdditionalCosts = 0;
+{% for cost in costs %}
+totalAdditionalCosts += {{ cost.amount_brl }};
+{% endfor %}
+
+// Cost comparison chart
+const ctx = document.getElementById('costComparisonChart').getContext('2d');
+const costComparisonChart = new Chart(ctx, {
+    type: 'bar',
     data: {
-        labels: [{% for tax_type in taxes.keys() %}'{{ tax_type }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+        labels: ['Custo Total', 'Preço de Venda*'],
         datasets: [{
-            data: [{% for tax_data in taxes.values() %}{{ tax_data.amount }}{% if not loop.last %}, {% endif %}{% endfor %}],
-            backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#FF9F40',
-                '#4BC0C0'
-            ]
+            label: 'Valor CIF',
+            data: [{{ calculation.total_cost_brl }}, 0],
+            backgroundColor: '#36A2EB',
+            stack: 'cost'
+        }, {
+            label: 'Impostos',
+            data: [{{ calculation.total_taxes_brl }}, 0],
+            backgroundColor: '#FF6384',
+            stack: 'cost'
+        }, {
+            label: 'Custos Adicionais',
+            data: [totalAdditionalCosts, 0],
+            backgroundColor: '#FFCE56',
+            stack: 'cost'
+        }, {
+            label: 'Preço de Venda',
+            data: [0, 0], // Will be updated dynamically
+            backgroundColor: '#4BC0C0',
+            stack: 'price'
         }]
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                stacked: true
+            },
+            y: {
+                stacked: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'R$ ' + value.toLocaleString('pt-BR', {minimumFractionDigits: 0});
+                    }
+                }
+            }
+        },
         plugins: {
             legend: {
                 position: 'bottom'
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                    }
+                }
             }
         }
+    }
+});
+
+// Function to update chart with selling price
+function updateCostComparisonChart(sellingPrice) {
+    costComparisonChart.data.datasets[3].data[1] = sellingPrice;
+    costComparisonChart.data.labels[1] = 'Preço de Venda';
+    costComparisonChart.update();
+    
+    // Calculate and display profit
+    const totalCost = {{ calculation.total_cost_brl }} + {{ calculation.total_taxes_brl }} + totalAdditionalCosts;
+    const profit = sellingPrice - totalCost;
+    const profitMargin = (profit / sellingPrice) * 100;
+    
+    // Update profit display
+    document.getElementById('profit-display').innerHTML = `
+        <div class="alert alert-${profit > 0 ? 'success' : 'danger'}" role="alert">
+            <strong>Lucro Líquido:</strong> R$ ${profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})} 
+            (${profitMargin.toFixed(1)}% de margem)
+        </div>
+    `;
+}
+
+// Update chart when selling price changes
+document.getElementById('selling_price_brl').addEventListener('input', function(e) {
+    const sellingPrice = parseFloat(e.target.value);
+    if (sellingPrice && sellingPrice > 0) {
+        updateCostComparisonChart(sellingPrice);
     }
 });
 
@@ -307,11 +350,17 @@ document.getElementById('profitability-form').addEventListener('submit', functio
     e.preventDefault();
     
     const formData = new FormData(this);
+    const sellingPrice = parseFloat(formData.get('selling_price_brl'));
     const button = this.querySelector('button[type="submit"]');
     const originalText = button.innerHTML;
     
     button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Calculando...';
     button.disabled = true;
+    
+    // Update chart immediately
+    if (sellingPrice && sellingPrice > 0) {
+        updateCostComparisonChart(sellingPrice);
+    }
     
     fetch(`/calcular-rentabilidade/{{ calculation.id }}`, {
         method: 'POST',
