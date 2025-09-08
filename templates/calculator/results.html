@@ -258,7 +258,8 @@ const costData = {
     cif: {{ calculation.total_cost_brl }},
     taxes: {{ calculation.total_taxes_brl }},
     additional: {% set additional_total = 0 %}{% for cost in costs %}{% set additional_total = additional_total + cost.amount_brl %}{% endfor %}{{ additional_total }},
-    total: {{ calculation.total_cost_brl }} + {{ calculation.total_taxes_brl }} + {% set additional_total = 0 %}{% for cost in costs %}{% set additional_total = additional_total + cost.amount_brl %}{% endfor %}{{ additional_total }}
+    total: {{ calculation.total_cost_brl }} + {{ calculation.total_taxes_brl }} + {% set additional_total = 0 %}{% for cost in costs %}{% set additional_total = additional_total + cost.amount_brl %}{% endfor %}{{ additional_total }},
+    quantity: {{ calculation.quantity }}
 };
 
 // Gráfico simples
@@ -279,7 +280,7 @@ function initChart() {
     chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Custo Total', 'Preço de Venda'],
+            labels: ['Custo Total', 'Faturamento Total'],
             datasets: [{
                 label: 'CIF',
                 data: [costData.cif, 0],
@@ -293,7 +294,7 @@ function initChart() {
                 data: [costData.additional, 0], 
                 backgroundColor: '#ffc107'
             }, {
-                label: 'Receita',
+                label: 'Faturamento',
                 data: [0, 0],
                 backgroundColor: '#198754'
             }]
@@ -330,27 +331,38 @@ function updateChart(sellingPrice) {
         return;
     }
     
-    const price = parseFloat(sellingPrice) || 0;
-    console.log('Preço processado:', price);
+    const unitPrice = parseFloat(sellingPrice) || 0;
+    const totalRevenue = unitPrice * costData.quantity; // Faturamento = preço × quantidade
     
-    // Atualizar a barra de receita no gráfico
-    chart.data.datasets[3].data[1] = price;
+    console.log('Preço unitário:', unitPrice);
+    console.log('Quantidade:', costData.quantity);
+    console.log('Faturamento total:', totalRevenue);
+    
+    // Atualizar a barra de faturamento no gráfico
+    chart.data.datasets[3].data[1] = totalRevenue;
     chart.update('none'); // Update sem animação para melhor performance
     
     // Atualizar display de lucro
-    updateProfitDisplay(price);
+    updateProfitDisplay(unitPrice, totalRevenue);
     
     console.log('Chart atualizado com sucesso');
 }
 
-function updateProfitDisplay(sellingPrice) {
-    const profit = sellingPrice - costData.total;
-    const margin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
+function updateProfitDisplay(unitPrice, totalRevenue) {
     const profitDisplay = document.getElementById('profit-display');
     
-    if (profitDisplay && sellingPrice > 0) {
-        const alertType = profit > 0 ? 'success' : 'danger';
-        const profitText = profit >= 0 ? 'Lucro' : 'Prejuízo';
+    if (profitDisplay && unitPrice > 0) {
+        // Calcular lucro líquido = Faturamento - Custo Total
+        const netProfit = totalRevenue - costData.total;
+        
+        // Margem sobre o valor de compra (custo total)
+        const profitMarginOnCost = (netProfit / costData.total) * 100;
+        
+        // Margem sobre o faturamento
+        const profitMarginOnRevenue = (netProfit / totalRevenue) * 100;
+        
+        const alertType = netProfit > 0 ? 'success' : 'danger';
+        const profitText = netProfit >= 0 ? 'Lucro' : 'Prejuízo';
         
         profitDisplay.innerHTML = `
             <div class="card">
@@ -358,31 +370,41 @@ function updateProfitDisplay(sellingPrice) {
                     <h6 class="mb-0">Análise de Rentabilidade</h6>
                 </div>
                 <div class="card-body">
-                    <div class="row text-center">
+                    <div class="row text-center mb-3">
                         <div class="col-md-3">
                             <strong>Custo Total</strong><br>
                             <span class="h5 text-danger">R$ ${costData.total.toFixed(2).replace('.', ',')}</span>
+                            <small class="d-block text-muted">${costData.quantity} unidades</small>
                         </div>
                         <div class="col-md-3">
-                            <strong>Preço de Venda</strong><br>
-                            <span class="h5 text-primary">R$ ${sellingPrice.toFixed(2).replace('.', ',')}</span>
+                            <strong>Preço Unitário</strong><br>
+                            <span class="h5 text-primary">R$ ${unitPrice.toFixed(2).replace('.', ',')}</span>
+                            <small class="d-block text-muted">por unidade</small>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Faturamento Total</strong><br>
+                            <span class="h5 text-info">R$ ${totalRevenue.toFixed(2).replace('.', ',')}</span>
+                            <small class="d-block text-muted">${costData.quantity} × R$ ${unitPrice.toFixed(2).replace('.', ',')}</small>
                         </div>
                         <div class="col-md-3">
                             <strong>${profitText} Líquido</strong><br>
-                            <span class="h5 text-${alertType}">R$ ${Math.abs(profit).toFixed(2).replace('.', ',')}</span>
-                        </div>
-                        <div class="col-md-3">
-                            <strong>Margem</strong><br>
-                            <span class="h5 text-${alertType}">${margin.toFixed(1)}%</span>
+                            <span class="h5 text-${alertType}">R$ ${Math.abs(netProfit).toFixed(2).replace('.', ',')}</span>
+                            <small class="d-block text-muted">${netProfit >= 0 ? '+' : '-'}${Math.abs(profitMarginOnCost).toFixed(1)}% sobre custo</small>
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <small><strong>ROI:</strong> ${(profit / costData.total * 100).toFixed(1)}%</small>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <small><strong>Margem sobre Compra:</strong><br>
+                            <span class="text-${alertType}">${profitMarginOnCost.toFixed(1)}%</span></small>
                         </div>
-                        <div class="col-md-6">
-                            <small><strong>Markup:</strong> ${(sellingPrice / costData.total).toFixed(2)}x</small>
+                        <div class="col-md-4">
+                            <small><strong>Margem sobre Venda:</strong><br>
+                            <span class="text-${alertType}">${profitMarginOnRevenue.toFixed(1)}%</span></small>
+                        </div>
+                        <div class="col-md-4">
+                            <small><strong>ROI:</strong><br>
+                            <span class="text-${alertType}">${profitMarginOnCost.toFixed(1)}%</span></small>
                         </div>
                     </div>
                 </div>
