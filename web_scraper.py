@@ -869,13 +869,17 @@ class NCMScraper:
             '85414350': {'description': 'Módulos fotovoltaicos bifaciais', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85414390': {'description': 'Outros módulos e painéis fotovoltaicos', 'ii_rate': 0.12, 'ipi_rate': 0.00, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
 
-            # EQUIPAMENTOS COMPLEMENTARES DE ENERGIA SOLAR
+            # POSIÇÃO 8504 - CONVERSORES ESTÁTICOS (CONFORME SISCOMEX)
             '85044000': {'description': 'Conversores estáticos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85044010': {'description': 'Inversores para sistemas fotovoltaicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85044020': {'description': 'Controladores de carga solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85044030': {'description': 'Microinversores solares', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85044040': {'description': 'Otimizadores de potência solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85044090': {'description': 'Outros conversores para energia solar', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044010': {'description': 'Carregadores de acumuladores', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044020': {'description': 'Equipamentos de alimentação ininterrupta de energia (UPS)', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044030': {'description': 'Outros conversores estáticos eletrônicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044040': {'description': 'Inversores de frequência', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044050': {'description': 'Conversores DC-DC', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044060': {'description': 'Conversores AC-DC (retificadores)', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044070': {'description': 'Inversores solares para sistemas fotovoltaicos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044080': {'description': 'Controladores de carga para baterias', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85044090': {'description': 'Outros conversores estáticos', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
 
             # ESTRUTURAS E ACESSÓRIOS PARA SISTEMAS SOLARES
             '76169910': {'description': 'Estruturas de fixação para painéis solares, de alumínio', 'ii_rate': 0.16, 'ipi_rate': 0.05, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
