@@ -253,118 +253,184 @@
 
 {% block scripts %}
 <script>
-// Calculate total additional costs
+// Calculate values for the chart
 let totalAdditionalCosts = 0;
+{% if costs %}
 {% for cost in costs %}
-totalAdditionalCosts += {{ cost.amount_brl or 0 }};
+totalAdditionalCosts += parseFloat({{ cost.amount_brl }}) || 0;
 {% endfor %}
+{% endif %}
 
-// Initialize values for the chart
-const cifValue = {{ calculation.total_cost_brl or 0 }};
-const taxesValue = {{ calculation.total_taxes_brl or 0 }};
-const additionalCostsValue = totalAdditionalCosts;
-const totalCostValue = cifValue + taxesValue + additionalCostsValue;
+// Initialize chart data
+const chartData = {
+    cifValue: parseFloat({{ calculation.total_cost_brl }}) || 0,
+    taxesValue: parseFloat({{ calculation.total_taxes_brl }}) || 0,
+    additionalCostsValue: totalAdditionalCosts
+};
+
+chartData.totalCostValue = chartData.cifValue + chartData.taxesValue + chartData.additionalCostsValue;
 
 // Cost comparison chart
-const ctx = document.getElementById('costComparisonChart').getContext('2d');
-const costComparisonChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Custo Total', 'Preço de Venda*'],
-        datasets: [{
-            label: 'Valor CIF',
-            data: [cifValue, 0],
-            backgroundColor: '#36A2EB'
-        }, {
-            label: 'Impostos',
-            data: [taxesValue, 0],
-            backgroundColor: '#FF6384'
-        }, {
-            label: 'Custos Adicionais',
-            data: [additionalCostsValue, 0],
-            backgroundColor: '#FFCE56'
-        }, {
-            label: 'Receita',
-            data: [0, 0], // Will be updated with selling price
-            backgroundColor: '#4BC0C0'
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                stacked: true
+const ctx = document.getElementById('costComparisonChart');
+if (ctx) {
+    const costComparisonChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Composição de Custos', 'Preço de Venda'],
+            datasets: [{
+                label: 'Valor CIF',
+                data: [chartData.cifValue, 0],
+                backgroundColor: '#0d6efd',
+                borderColor: '#0d6efd',
+                borderWidth: 1
+            }, {
+                label: 'Impostos',
+                data: [chartData.taxesValue, 0],
+                backgroundColor: '#dc3545',
+                borderColor: '#dc3545',
+                borderWidth: 1
+            }, {
+                label: 'Custos Adicionais',
+                data: [chartData.additionalCostsValue, 0],
+                backgroundColor: '#ffc107',
+                borderColor: '#ffc107',
+                borderWidth: 1
+            }, {
+                label: 'Receita de Venda',
+                data: [0, 0],
+                backgroundColor: '#198754',
+                borderColor: '#198754',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'index'
             },
-            y: {
-                stacked: true,
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value) {
-                        return 'R$ ' + value.toLocaleString('pt-BR', {
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 0
-                        });
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return new Intl.NumberFormat('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL',
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            }).format(value);
+                        }
                     }
                 }
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'bottom'
             },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        return context.dataset.label + ': R$ ' + context.parsed.y.toLocaleString('pt-BR', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        });
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            if (context.parsed.y === 0) return null;
+                            return context.dataset.label + ': ' + 
+                                new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(context.parsed.y);
+                        }
                     }
                 }
             }
         }
-    }
-});
+    });
+
+    // Store chart reference globally
+    window.costComparisonChart = costComparisonChart;
+    window.chartData = chartData;
+}
 
 // Function to update chart with selling price
 function updateCostComparisonChart(sellingPrice) {
-    // Update the chart data
-    costComparisonChart.data.datasets[3].data[1] = sellingPrice;
-    costComparisonChart.data.labels[1] = 'Preço de Venda';
-    costComparisonChart.update();
+    if (!window.costComparisonChart || !window.chartData) {
+        console.error('Chart não inicializado');
+        return;
+    }
     
-    // Calculate and display profit
-    const profit = sellingPrice - totalCostValue;
-    const profitMargin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
+    const chart = window.costComparisonChart;
+    const data = window.chartData;
+    
+    // Update chart data
+    chart.data.datasets[3].data[1] = parseFloat(sellingPrice) || 0;
+    chart.update('none'); // Animate without transitions for better performance
+    
+    // Calculate profit
+    const sellingPriceNum = parseFloat(sellingPrice) || 0;
+    const profit = sellingPriceNum - data.totalCostValue;
+    const profitMargin = sellingPriceNum > 0 ? (profit / sellingPriceNum) * 100 : 0;
     
     // Update profit display
     const profitDisplay = document.getElementById('profit-display');
-    if (profitDisplay) {
+    if (profitDisplay && sellingPriceNum > 0) {
+        const alertClass = profit > 0 ? 'success' : 'danger';
+        const profitFormatted = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(profit);
+        const totalCostFormatted = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(data.totalCostValue);
+        
         profitDisplay.innerHTML = `
-            <div class="alert alert-${profit > 0 ? 'success' : 'danger'}" role="alert">
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Lucro Líquido:</strong><br>
-                        R$ ${profit.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            <div class="alert alert-${alertClass}" role="alert">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <strong>Custo Total</strong><br>
+                        <span class="h6">${totalCostFormatted}</span>
                     </div>
-                    <div class="col-md-6">
-                        <strong>Margem de Lucro:</strong><br>
-                        ${profitMargin.toFixed(1)}%
+                    <div class="col-md-4">
+                        <strong>Lucro Líquido</strong><br>
+                        <span class="h6">${profitFormatted}</span>
+                    </div>
+                    <div class="col-md-4">
+                        <strong>Margem</strong><br>
+                        <span class="h6">${profitMargin.toFixed(1)}%</span>
                     </div>
                 </div>
-                <hr class="my-2">
-                <small><strong>Custo Total:</strong> R$ ${totalCostValue.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</small>
             </div>
         `;
+    } else if (profitDisplay && sellingPriceNum === 0) {
+        profitDisplay.innerHTML = '';
     }
 }
 
 // Update chart when selling price changes
-document.getElementById('selling_price_brl').addEventListener('input', function(e) {
-    const sellingPrice = parseFloat(e.target.value);
-    if (sellingPrice && sellingPrice > 0) {
-        updateCostComparisonChart(sellingPrice);
+document.addEventListener('DOMContentLoaded', function() {
+    const sellingPriceInput = document.getElementById('selling_price_brl');
+    if (sellingPriceInput) {
+        sellingPriceInput.addEventListener('input', function(e) {
+            const sellingPrice = parseFloat(e.target.value) || 0;
+            updateCostComparisonChart(sellingPrice);
+        });
+        
+        sellingPriceInput.addEventListener('keyup', function(e) {
+            const sellingPrice = parseFloat(e.target.value) || 0;
+            updateCostComparisonChart(sellingPrice);
+        });
     }
 });
 
