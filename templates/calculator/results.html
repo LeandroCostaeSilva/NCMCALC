@@ -131,7 +131,12 @@
                         </div>
 
                         <div class="text-center">
-                            {{ profitability_form.submit() }}
+                            <button type="button" class="btn btn-success" onclick="generateProfitabilityReport()">
+                                <i data-feather="file-text" class="me-2"></i>Gerar Relatório de Rentabilidade
+                            </button>
+                            <button type="button" class="btn btn-outline-primary ms-2" onclick="exportToPDF()" id="export-pdf-btn" style="display: none;">
+                                <i data-feather="download" class="me-2"></i>Exportar PDF
+                            </button>
                         </div>
                     </form>
 
@@ -266,16 +271,8 @@ const costData = {
 let chart = null;
 
 function initChart() {
-    console.log('Inicializando chart...');
-    console.log('Dados de custo:', costData);
-    
     const ctx = document.getElementById('costComparisonChart');
-    if (!ctx) {
-        console.error('Canvas costComparisonChart não encontrado');
-        return;
-    }
-    
-    console.log('Canvas encontrado, criando chart...');
+    if (!ctx) return;
     
     chart = new Chart(ctx, {
         type: 'bar',
@@ -319,24 +316,13 @@ function initChart() {
             }
         }
     });
-    
-    console.log('Chart criado com sucesso:', chart);
 }
 
 function updateChart(sellingPrice) {
-    console.log('updateChart chamada com preço:', sellingPrice);
-    
-    if (!chart) {
-        console.error('Chart não encontrado');
-        return;
-    }
+    if (!chart) return;
     
     const unitPrice = parseFloat(sellingPrice) || 0;
     const totalRevenue = unitPrice * costData.quantity; // Faturamento = preço × quantidade
-    
-    console.log('Preço unitário:', unitPrice);
-    console.log('Quantidade:', costData.quantity);
-    console.log('Faturamento total:', totalRevenue);
     
     // Atualizar a barra de faturamento no gráfico
     chart.data.datasets[3].data[1] = totalRevenue;
@@ -344,8 +330,6 @@ function updateChart(sellingPrice) {
     
     // Atualizar display de lucro
     updateProfitDisplay(unitPrice, totalRevenue);
-    
-    console.log('Chart atualizado com sucesso');
 }
 
 function updateProfitDisplay(unitPrice, totalRevenue) {
@@ -426,12 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (priceInput) {
-        console.log('Campo de preço encontrado:', priceInput);
-        
         // Adicionar múltiplos event listeners para garantir que funciona
         priceInput.addEventListener('input', function() {
             const value = parseFloat(this.value) || 0;
-            console.log('Preço informado:', value);
             updateChart(value);
         });
         
@@ -444,13 +425,188 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = parseFloat(this.value) || 0;
             updateChart(value);
         });
-    } else {
-        console.error('Campo selling_price_brl não encontrado');
-        // Tentar encontrar qualquer input de número na página
-        const allInputs = document.querySelectorAll('input[type="number"]');
-        console.log('Inputs encontrados:', allInputs);
     }
 });
+
+// Gerar relatório de rentabilidade completo
+function generateProfitabilityReport() {
+    const priceInput = document.getElementById('selling_price_brl') || document.querySelector('input[name="selling_price_brl"]');
+    
+    if (!priceInput || !priceInput.value || parseFloat(priceInput.value) <= 0) {
+        alert('Por favor, informe um preço de venda válido antes de gerar o relatório.');
+        priceInput?.focus();
+        return;
+    }
+    
+    const unitPrice = parseFloat(priceInput.value);
+    const totalRevenue = unitPrice * costData.quantity;
+    const netProfit = totalRevenue - costData.total;
+    const profitMarginOnCost = (netProfit / costData.total) * 100;
+    const profitMarginOnRevenue = (netProfit / totalRevenue) * 100;
+    
+    // Atualizar gráfico
+    updateChart(unitPrice);
+    
+    // Mostrar botão de exportar PDF
+    const exportBtn = document.getElementById('export-pdf-btn');
+    if (exportBtn) {
+        exportBtn.style.display = 'inline-block';
+    }
+    
+    // Adicionar seção de relatório completo
+    let reportSection = document.getElementById('complete-report');
+    if (!reportSection) {
+        reportSection = document.createElement('div');
+        reportSection.id = 'complete-report';
+        reportSection.className = 'mt-4';
+        
+        const mainContainer = document.querySelector('.col-lg-8');
+        if (mainContainer) {
+            mainContainer.appendChild(reportSection);
+        }
+    }
+    
+    reportSection.innerHTML = `
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i data-feather="file-text" class="me-2"></i>Relatório Completo de Rentabilidade
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">DADOS DO PRODUTO</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>Produto:</strong></td><td>{{ calculation.product_name }}</td></tr>
+                            <tr><td><strong>NCM:</strong></td><td>{{ calculation.ncm_code }}</td></tr>
+                            <tr><td><strong>Quantidade:</strong></td><td>${costData.quantity} unidades</td></tr>
+                            <tr><td><strong>Origem:</strong></td><td>{{ calculation.origin_country }}</td></tr>
+                            <tr><td><strong>Câmbio:</strong></td><td>R$ {{ "%.4f"|format(calculation.exchange_rate) }}</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">COMPOSIÇÃO DE CUSTOS</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>Valor CIF:</strong></td><td>R$ ${costData.cif.toFixed(2).replace('.', ',')}</td></tr>
+                            <tr><td><strong>Impostos:</strong></td><td>R$ ${costData.taxes.toFixed(2).replace('.', ',')}</td></tr>
+                            <tr><td><strong>Custos Extras:</strong></td><td>R$ ${costData.additional.toFixed(2).replace('.', ',')}</td></tr>
+                            <tr class="table-warning"><td><strong>TOTAL CUSTOS:</strong></td><td><strong>R$ ${costData.total.toFixed(2).replace('.', ',')}</strong></td></tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h6 class="text-muted">ANÁLISE DE RENTABILIDADE</h6>
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Preço Unitário</h6>
+                                        <h4 class="text-primary">R$ ${unitPrice.toFixed(2).replace('.', ',')}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Faturamento Total</h6>
+                                        <h4 class="text-info">R$ ${totalRevenue.toFixed(2).replace('.', ',')}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${netProfit >= 0 ? 'Lucro' : 'Prejuízo'} Líquido</h6>
+                                        <h4 class="text-${netProfit >= 0 ? 'success' : 'danger'}">R$ ${Math.abs(netProfit).toFixed(2).replace('.', ',')}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Margem sobre Compra</h6>
+                                        <h4 class="text-${netProfit >= 0 ? 'success' : 'danger'}">${profitMarginOnCost.toFixed(1)}%</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">INDICADORES</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>ROI:</strong></td><td class="text-${netProfit >= 0 ? 'success' : 'danger'}">${profitMarginOnCost.toFixed(1)}%</td></tr>
+                            <tr><td><strong>Margem sobre Venda:</strong></td><td>${profitMarginOnRevenue.toFixed(1)}%</td></tr>
+                            <tr><td><strong>Markup:</strong></td><td>${(totalRevenue / costData.total).toFixed(2)}x</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">RESUMO</h6>
+                        <table class="table table-sm">
+                            <tr><td><strong>Custo por Unidade:</strong></td><td>R$ ${(costData.total / costData.quantity).toFixed(2).replace('.', ',')}</td></tr>
+                            <tr><td><strong>Lucro por Unidade:</strong></td><td class="text-${netProfit >= 0 ? 'success' : 'danger'}">R$ ${(netProfit / costData.quantity).toFixed(2).replace('.', ',')}</td></tr>
+                            <tr><td><strong>Data do Cálculo:</strong></td><td>{{ calculation.created_at.strftime('%d/%m/%Y %H:%M') }}</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Reativar ícones do Feather
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+}
+
+// Exportar relatório para PDF
+function exportToPDF() {
+    const reportElement = document.getElementById('complete-report');
+    if (!reportElement) {
+        alert('Gere o relatório primeiro antes de exportar.');
+        return;
+    }
+    
+    // Usar window.print() para gerar PDF
+    const originalContents = document.body.innerHTML;
+    const reportContents = `
+        <html>
+        <head>
+            <title>Relatório de Rentabilidade - {{ calculation.product_name }}</title>
+            <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+            <style>
+                @media print {
+                    body { background: white !important; color: black !important; }
+                    .card { border: 1px solid #ccc !important; }
+                    .bg-success { background-color: #28a745 !important; }
+                    .text-white { color: white !important; }
+                    .text-success { color: #28a745 !important; }
+                    .text-danger { color: #dc3545 !important; }
+                    .text-info { color: #17a2b8 !important; }
+                    .text-primary { color: #007bff !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container mt-3">
+                <h2>NCMCALC - Calculadora de Importação</h2>
+                ${reportElement.innerHTML}
+            </div>
+        </body>
+        </html>
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(reportContents);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+}
 
 // Save scenario function
 function saveScenario() {
@@ -464,7 +620,6 @@ function saveScenario() {
     .then(data => {
         if (data.success) {
             alert('Cenário salvo com sucesso!');
-            // Hide modal if exists
             const modal = document.getElementById('saveScenarioModal');
             if (modal) {
                 const modalInstance = bootstrap.Modal.getInstance(modal);
