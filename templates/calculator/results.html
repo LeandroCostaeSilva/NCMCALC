@@ -98,10 +98,16 @@
                     </div>
                     
                     <!-- Cost Comparison Chart -->
-                    <div class="text-center mt-4">
-                        <canvas id="costComparisonChart" width="400" height="200"></canvas>
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-md-8 mx-auto">
+                                <canvas id="costComparisonChart" height="300"></canvas>
+                            </div>
+                        </div>
                         <div id="profit-display" class="mt-3"></div>
-                        <small class="text-muted">* Informe um preço de venda na análise de rentabilidade para visualizar a comparação</small>
+                        <div class="text-center">
+                            <small class="text-muted">* Informe um preço de venda na análise de rentabilidade para visualizar a comparação</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,12 +135,6 @@
                         </div>
                     </form>
 
-                    <!-- Profitability Results -->
-                    <div id="profitability-results" class="mt-4" style="display: none;">
-                        <hr>
-                        <h6>Resultados da Análise de Rentabilidade</h6>
-                        <div class="row" id="profitability-cards"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -253,273 +253,140 @@
 
 {% block scripts %}
 <script>
-// Calculate values for the chart
-let totalAdditionalCosts = 0;
-{% if costs %}
-{% for cost in costs %}
-totalAdditionalCosts += parseFloat({{ cost.amount_brl }}) || 0;
-{% endfor %}
-{% endif %}
-
-// Initialize chart data
-const chartData = {
-    cifValue: parseFloat({{ calculation.total_cost_brl }}) || 0,
-    taxesValue: parseFloat({{ calculation.total_taxes_brl }}) || 0,
-    additionalCostsValue: totalAdditionalCosts
+// Dados do cálculo
+const costData = {
+    cif: {{ calculation.total_cost_brl }},
+    taxes: {{ calculation.total_taxes_brl }},
+    additional: {% set additional_total = 0 %}{% for cost in costs %}{% set additional_total = additional_total + cost.amount_brl %}{% endfor %}{{ additional_total }},
+    total: {{ calculation.total_cost_brl }} + {{ calculation.total_taxes_brl }} + {% set additional_total = 0 %}{% for cost in costs %}{% set additional_total = additional_total + cost.amount_brl %}{% endfor %}{{ additional_total }}
 };
 
-chartData.totalCostValue = chartData.cifValue + chartData.taxesValue + chartData.additionalCostsValue;
+// Gráfico simples
+let chart = null;
 
-// Cost comparison chart
-const ctx = document.getElementById('costComparisonChart');
-if (ctx) {
-    const costComparisonChart = new Chart(ctx, {
+function initChart() {
+    const ctx = document.getElementById('costComparisonChart');
+    if (!ctx) return;
+    
+    chart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Composição de Custos', 'Preço de Venda'],
+            labels: ['Custo Total', 'Preço de Venda'],
             datasets: [{
-                label: 'Valor CIF',
-                data: [chartData.cifValue, 0],
-                backgroundColor: '#0d6efd',
-                borderColor: '#0d6efd',
-                borderWidth: 1
+                label: 'CIF',
+                data: [costData.cif, 0],
+                backgroundColor: '#0d6efd'
             }, {
-                label: 'Impostos',
-                data: [chartData.taxesValue, 0],
-                backgroundColor: '#dc3545',
-                borderColor: '#dc3545',
-                borderWidth: 1
+                label: 'Impostos', 
+                data: [costData.taxes, 0],
+                backgroundColor: '#dc3545'
             }, {
-                label: 'Custos Adicionais',
-                data: [chartData.additionalCostsValue, 0],
-                backgroundColor: '#ffc107',
-                borderColor: '#ffc107',
-                borderWidth: 1
+                label: 'Custos Extras',
+                data: [costData.additional, 0], 
+                backgroundColor: '#ffc107'
             }, {
-                label: 'Receita de Venda',
+                label: 'Receita',
                 data: [0, 0],
-                backgroundColor: '#198754',
-                borderColor: '#198754',
-                borderWidth: 1
+                backgroundColor: '#198754'
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: {
-                intersect: false,
-                mode: 'index'
-            },
             scales: {
-                x: {
-                    stacked: true,
-                    grid: {
-                        display: false
-                    }
-                },
-                y: {
+                x: { stacked: true },
+                y: { 
                     stacked: true,
                     beginAtZero: true,
                     ticks: {
                         callback: function(value) {
-                            return new Intl.NumberFormat('pt-BR', {
-                                style: 'currency',
-                                currency: 'BRL',
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0
-                            }).format(value);
+                            return 'R$ ' + value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                         }
                     }
                 }
             },
             plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        usePointStyle: true
-                    }
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            if (context.parsed.y === 0) return null;
-                            return context.dataset.label + ': ' + 
-                                new Intl.NumberFormat('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL'
-                                }).format(context.parsed.y);
-                        }
-                    }
-                }
+                legend: { position: 'bottom' }
             }
         }
     });
-
-    // Store chart reference globally
-    window.costComparisonChart = costComparisonChart;
-    window.chartData = chartData;
 }
 
-// Function to update chart with selling price
-function updateCostComparisonChart(sellingPrice) {
-    if (!window.costComparisonChart || !window.chartData) {
-        console.error('Chart não inicializado');
-        return;
-    }
+function updateChart(sellingPrice) {
+    if (!chart) return;
     
-    const chart = window.costComparisonChart;
-    const data = window.chartData;
+    const price = parseFloat(sellingPrice) || 0;
+    chart.data.datasets[3].data[1] = price;
+    chart.update();
     
-    // Update chart data
-    chart.data.datasets[3].data[1] = parseFloat(sellingPrice) || 0;
-    chart.update('none'); // Animate without transitions for better performance
-    
-    // Calculate profit
-    const sellingPriceNum = parseFloat(sellingPrice) || 0;
-    const profit = sellingPriceNum - data.totalCostValue;
-    const profitMargin = sellingPriceNum > 0 ? (profit / sellingPriceNum) * 100 : 0;
-    
-    // Update profit display
+    // Atualizar display de lucro
+    updateProfitDisplay(price);
+}
+
+function updateProfitDisplay(sellingPrice) {
+    const profit = sellingPrice - costData.total;
+    const margin = sellingPrice > 0 ? (profit / sellingPrice) * 100 : 0;
     const profitDisplay = document.getElementById('profit-display');
-    if (profitDisplay && sellingPriceNum > 0) {
-        const alertClass = profit > 0 ? 'success' : 'danger';
-        const profitFormatted = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(profit);
-        const totalCostFormatted = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(data.totalCostValue);
+    
+    if (profitDisplay && sellingPrice > 0) {
+        const alertType = profit > 0 ? 'success' : 'danger';
+        const profitText = profit >= 0 ? 'Lucro' : 'Prejuízo';
         
         profitDisplay.innerHTML = `
-            <div class="alert alert-${alertClass}" role="alert">
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <strong>Custo Total</strong><br>
-                        <span class="h6">${totalCostFormatted}</span>
+            <div class="card">
+                <div class="card-header bg-${alertType} text-white">
+                    <h6 class="mb-0">Análise de Rentabilidade</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <strong>Custo Total</strong><br>
+                            <span class="h5 text-danger">R$ ${costData.total.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Preço de Venda</strong><br>
+                            <span class="h5 text-primary">R$ ${sellingPrice.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>${profitText} Líquido</strong><br>
+                            <span class="h5 text-${alertType}">R$ ${Math.abs(profit).toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Margem</strong><br>
+                            <span class="h5 text-${alertType}">${margin.toFixed(1)}%</span>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <strong>Lucro Líquido</strong><br>
-                        <span class="h6">${profitFormatted}</span>
-                    </div>
-                    <div class="col-md-4">
-                        <strong>Margem</strong><br>
-                        <span class="h6">${profitMargin.toFixed(1)}%</span>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small><strong>ROI:</strong> ${(profit / costData.total * 100).toFixed(1)}%</small>
+                        </div>
+                        <div class="col-md-6">
+                            <small><strong>Markup:</strong> ${(sellingPrice / costData.total).toFixed(2)}x</small>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
-    } else if (profitDisplay && sellingPriceNum === 0) {
+    } else if (profitDisplay) {
         profitDisplay.innerHTML = '';
     }
 }
 
-// Update chart when selling price changes
+// Inicializar quando a página carregar
 document.addEventListener('DOMContentLoaded', function() {
-    const sellingPriceInput = document.getElementById('selling_price_brl');
-    if (sellingPriceInput) {
-        sellingPriceInput.addEventListener('input', function(e) {
-            const sellingPrice = parseFloat(e.target.value) || 0;
-            updateCostComparisonChart(sellingPrice);
-        });
-        
-        sellingPriceInput.addEventListener('keyup', function(e) {
-            const sellingPrice = parseFloat(e.target.value) || 0;
-            updateCostComparisonChart(sellingPrice);
+    initChart();
+    
+    const priceInput = document.getElementById('selling_price_brl');
+    if (priceInput) {
+        priceInput.addEventListener('input', function() {
+            const value = parseFloat(this.value) || 0;
+            updateChart(value);
         });
     }
 });
 
-// Profitability calculation
-document.getElementById('profitability-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const sellingPrice = parseFloat(formData.get('selling_price_brl'));
-    const button = this.querySelector('button[type="submit"]');
-    const originalText = button.innerHTML;
-    
-    button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Calculando...';
-    button.disabled = true;
-    
-    // Update chart immediately
-    if (sellingPrice && sellingPrice > 0) {
-        updateCostComparisonChart(sellingPrice);
-    }
-    
-    fetch(`/calcular-rentabilidade/{{ calculation.id }}`, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            displayProfitabilityResults(data.data);
-        } else {
-            alert('Erro ao calcular rentabilidade: ' + data.error);
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao calcular rentabilidade');
-    })
-    .finally(() => {
-        button.innerHTML = originalText;
-        button.disabled = false;
-    });
-});
-
-function displayProfitabilityResults(data) {
-    const resultsDiv = document.getElementById('profitability-results');
-    const cardsDiv = document.getElementById('profitability-cards');
-    
-    cardsDiv.innerHTML = `
-        <div class="col-md-6 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h6 class="card-title text-muted">Lucro Bruto</h6>
-                    <h5 class="text-success">R$ ${data.gross_profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h5>
-                    <small class="text-muted">${data.gross_margin.toFixed(1)}% margem</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h6 class="card-title text-muted">Lucro Líquido</h6>
-                    <h5 class="text-${data.net_profit > 0 ? 'success' : 'danger'}">R$ ${data.net_profit.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h5>
-                    <small class="text-muted">${data.net_margin.toFixed(1)}% margem</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h6 class="card-title text-muted">ROI</h6>
-                    <h5 class="text-${data.roi > 0 ? 'success' : 'danger'}">${data.roi.toFixed(1)}%</h5>
-                    <small class="text-muted">Retorno sobre investimento</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h6 class="card-title text-muted">Custo Total Final</h6>
-                    <h5 class="text-info">R$ ${data.total_cost.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</h5>
-                    <small class="text-muted">Incluindo todos os custos</small>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    resultsDiv.style.display = 'block';
-}
-
-// Save scenario
+// Save scenario function
 function saveScenario() {
     const formData = new FormData(document.getElementById('scenario-form'));
     
@@ -530,8 +397,13 @@ function saveScenario() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            bootstrap.Modal.getInstance(document.getElementById('saveScenarioModal')).hide();
-            // Show success message (you can add a toast notification here)
+            alert('Cenário salvo com sucesso!');
+            // Hide modal if exists
+            const modal = document.getElementById('saveScenarioModal');
+            if (modal) {
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                if (modalInstance) modalInstance.hide();
+            }
         } else {
             alert('Erro ao salvar cenário: ' + data.error);
         }
