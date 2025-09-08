@@ -265,8 +265,16 @@ const costData = {
 let chart = null;
 
 function initChart() {
+    console.log('Inicializando chart...');
+    console.log('Dados de custo:', costData);
+    
     const ctx = document.getElementById('costComparisonChart');
-    if (!ctx) return;
+    if (!ctx) {
+        console.error('Canvas costComparisonChart não encontrado');
+        return;
+    }
+    
+    console.log('Canvas encontrado, criando chart...');
     
     chart = new Chart(ctx, {
         type: 'bar',
@@ -310,17 +318,29 @@ function initChart() {
             }
         }
     });
+    
+    console.log('Chart criado com sucesso:', chart);
 }
 
 function updateChart(sellingPrice) {
-    if (!chart) return;
+    console.log('updateChart chamada com preço:', sellingPrice);
+    
+    if (!chart) {
+        console.error('Chart não encontrado');
+        return;
+    }
     
     const price = parseFloat(sellingPrice) || 0;
+    console.log('Preço processado:', price);
+    
+    // Atualizar a barra de receita no gráfico
     chart.data.datasets[3].data[1] = price;
-    chart.update();
+    chart.update('none'); // Update sem animação para melhor performance
     
     // Atualizar display de lucro
     updateProfitDisplay(price);
+    
+    console.log('Chart atualizado com sucesso');
 }
 
 function updateProfitDisplay(sellingPrice) {
@@ -377,12 +397,36 @@ function updateProfitDisplay(sellingPrice) {
 document.addEventListener('DOMContentLoaded', function() {
     initChart();
     
-    const priceInput = document.getElementById('selling_price_brl');
+    // Procurar o campo de preço de venda tanto por ID quanto por name
+    let priceInput = document.getElementById('selling_price_brl');
+    if (!priceInput) {
+        priceInput = document.querySelector('input[name="selling_price_brl"]');
+    }
+    
     if (priceInput) {
+        console.log('Campo de preço encontrado:', priceInput);
+        
+        // Adicionar múltiplos event listeners para garantir que funciona
         priceInput.addEventListener('input', function() {
+            const value = parseFloat(this.value) || 0;
+            console.log('Preço informado:', value);
+            updateChart(value);
+        });
+        
+        priceInput.addEventListener('keyup', function() {
             const value = parseFloat(this.value) || 0;
             updateChart(value);
         });
+        
+        priceInput.addEventListener('change', function() {
+            const value = parseFloat(this.value) || 0;
+            updateChart(value);
+        });
+    } else {
+        console.error('Campo selling_price_brl não encontrado');
+        // Tentar encontrar qualquer input de número na página
+        const allInputs = document.querySelectorAll('input[type="number"]');
+        console.log('Inputs encontrados:', allInputs);
     }
 });
 
