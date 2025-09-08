@@ -484,7 +484,41 @@ class NCMService:
             'planta estabilizada': ['stabilized plant', 'preservada', 'tratada'],
             'verde preservado': ['preserved greenery', 'folhagem tratada', 'planta conservada'],
             'material vegetal': ['plant material', 'matéria prima vegetal', 'insumo plantas'],
-            'produto floricultura': ['floriculture product', 'artigo flores', 'item floral']
+            'produto floricultura': ['floriculture product', 'artigo flores', 'item floral'],
+            
+            # ENERGIA SOLAR E FOTOVOLTAICA - CAPÍTULOS 8541, 8501
+            'placa solar': ['painel solar', 'módulo fotovoltaico', 'solar panel'],
+            'painel solar': ['placa solar', 'módulo fotovoltaico', 'painel fotovoltaico'],
+            'módulo fotovoltaico': ['painel solar', 'placa solar', 'módulo solar'],
+            'célula fotovoltaica': ['célula solar', 'célula PV', 'photovoltaic cell'],
+            'célula solar': ['célula fotovoltaica', 'célula PV', 'solar cell'],
+            'energia solar': ['fotovoltaica', 'energia fotovoltaica', 'solar energy'],
+            'fotovoltaico': ['solar', 'photovoltaic', 'PV'],
+            'sistema solar': ['sistema fotovoltaico', 'usina solar', 'geração solar'],
+            'sistema fotovoltaico': ['sistema solar', 'instalação solar', 'solar system'],
+            'silício monocristalino': ['mono-Si', 'monocrystalline', 'silício mono'],
+            'silício policristalino': ['poly-Si', 'polycrystalline', 'silício poli'],
+            'silício amorfo': ['a-Si', 'amorphous silicon', 'filme fino'],
+            'filme fino': ['thin film', 'silício amorfo', 'tecnologia filme'],
+            'módulo bifacial': ['painel bifacial', 'placa dupla face', 'bifacial'],
+            'inversor solar': ['inversor fotovoltaico', 'conversor DC-AC', 'solar inverter'],
+            'microinversor': ['micro inversor', 'microinverter', 'inversor módulo'],
+            'otimizador potência': ['power optimizer', 'otimizador solar', 'MLPE'],
+            'controlador carga': ['charge controller', 'regulador carga', 'MPPT'],
+            'gerador solar': ['sistema geração solar', 'usina solar', 'solar generator'],
+            'cabo solar': ['cabo DC', 'cabo fotovoltaico', 'solar cable'],
+            'conector MC4': ['conector solar', 'MC4 connector', 'plug solar'],
+            'estrutura fixação': ['suporte painel', 'mounting structure', 'estrutura solar'],
+            'string box': ['caixa combinadora', 'DC combiner', 'quadro DC'],
+            'fusível solar': ['fuse solar', 'proteção DC', 'fusível fotovoltaico'],
+            'disjuntor solar': ['breaker solar', 'proteção AC', 'disjuntor fotovoltaico'],
+            'usina solar': ['fazenda solar', 'parque fotovoltaico', 'solar farm'],
+            'energia renovável': ['renewable energy', 'energia limpa', 'sustentável'],
+            'geração distribuída': ['GD', 'microgeração', 'minigeração'],
+            'on grid': ['grid tie', 'conectado rede', 'sistema conectado'],
+            'off grid': ['sistema isolado', 'standalone', 'autônomo'],
+            'sistema híbrido': ['hybrid system', 'backup solar', 'baterias'],
+            'medição bidirecional': ['net metering', 'compensação energia', 'sistema créditos']
         }
         
         # Adicionar expansões baseadas no mapeamento
