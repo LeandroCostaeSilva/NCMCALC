@@ -889,7 +889,71 @@ class NCMScraper:
             '85369000': {'description': 'Outros aparelhos para proteção de circuitos elétricos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85369010': {'description': 'String box para sistemas solares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
             '85369020': {'description': 'Fusíveis para sistemas fotovoltaicos', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
-            '85369030': {'description': 'Disjuntores para sistemas solares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
+            '85369030': {'description': 'Disjuntores para sistemas solares', 'ii_rate': 0.16, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SEÇÃO XVI - MÁQUINAS E APARELHOS, MATERIAL ELÉTRICO E SUAS PARTES
+            # CAPÍTULO 85 - MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS E SUAS PARTES
+            # POSIÇÃO 8517 - APARELHOS ELÉTRICOS PARA TELEFONIA OU TELEGRAFIA POR FIOS; APARELHOS PARA TELECOMUNICAÇÃO
+
+            # SUBPOSIÇÃO 851762 - APARELHOS PARA RECEPÇÃO, CONVERSÃO E TRANSMISSÃO OU REGENERAÇÃO DE VOZ, IMAGENS OU OUTROS DADOS
+            '85176241': {'description': 'Kit de alta performance para conexão sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176264': {'description': 'Kit Mini para conexão sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # CÓDIGOS ESPECÍFICOS DE EQUIPAMENTOS SEM FIO E TELECOMUNICAÇÃO
+            '85176200': {'description': 'Aparelhos para recepção, conversão e transmissão ou regeneração de voz, imagens ou outros dados', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176210': {'description': 'Roteadores WiFi', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176220': {'description': 'Access Points (pontos de acesso)', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176230': {'description': 'Repetidores de sinal WiFi', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176240': {'description': 'Equipamentos mesh para redes sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176250': {'description': 'Adaptadores USB WiFi', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176260': {'description': 'Antenas para equipamentos sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176270': {'description': 'Switches com funcionalidades wireless', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176280': {'description': 'Bridges para redes sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176290': {'description': 'Outros equipamentos para transmissão sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # SUBPOSIÇÃO 851761 - ESTAÇÕES BASE PARA TELECOMUNICAÇÃO SEM FIO
+            '85176100': {'description': 'Estações base para telecomunicação sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176110': {'description': 'Estações rádio base (ERB)', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176120': {'description': 'Repetidores de sinal celular', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176130': {'description': 'Amplificadores de sinal móvel', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176190': {'description': 'Outras estações base para telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # TELECOMUNICAÇÃO POR SATÉLITE - NCM 8517614
+            '85176140': {'description': 'Equipamentos para telecomunicação por satélite', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176141': {'description': 'Antenas parabólicas para satélite', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176142': {'description': 'Receptores de sinal de satélite', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176143': {'description': 'Modems satelitais', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176144': {'description': 'Terminais VSAT', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176145': {'description': 'LNB (Low Noise Block) para antenas satelitais', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176149': {'description': 'Outros equipamentos para comunicação por satélite', 'ii_rate': 0.14, 'ipi_rate': 0.10, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # OUTROS EQUIPAMENTOS DE TELECOMUNICAÇÃO - POSIÇÃO 8517
+            '85171100': {'description': 'Aparelhos telefônicos por fio com unidade auscultador-microfone sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85171200': {'description': 'Telefones para redes celulares ou para outras redes sem fio', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85171800': {'description': 'Outros aparelhos telefônicos', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176300': {'description': 'Aparelhos de recepção para radiotelefonia ou radiotelegrafia', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176910': {'description': 'Videofones', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176920': {'description': 'Aparelhos de videoconferência', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176990': {'description': 'Outros aparelhos para telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # MODEMS E EQUIPAMENTOS DE REDE
+            '85176410': {'description': 'Modems ADSL', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176420': {'description': 'Modems cable', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176430': {'description': 'Modems fibra óptica', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176440': {'description': 'Gateways para telecomunicações', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176450': {'description': 'Switches de rede', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176460': {'description': 'Hubs de rede', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176470': {'description': 'Conversores de mídia para telecomunicações', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176480': {'description': 'Equipamentos VoIP (Voice over IP)', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85176490': {'description': 'Outros equipamentos para redes de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+
+            # PARTES E ACESSÓRIOS PARA EQUIPAMENTOS DE TELECOMUNICAÇÃO
+            '85179000': {'description': 'Partes dos aparelhos das posições 85.16 ou 85.17', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85179010': {'description': 'Antenas para aparelhos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85179020': {'description': 'Baterias para equipamentos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85179030': {'description': 'Carregadores para dispositivos de comunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85179040': {'description': 'Cabos e conectores para telecomunicações', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18},
+            '85179090': {'description': 'Outras partes para equipamentos de telecomunicação', 'ii_rate': 0.16, 'ipi_rate': 0.15, 'pis_rate': 0.0165, 'cofins_rate': 0.076, 'icms_rate': 0.18}
         }
 
 # Instância global do serviço
